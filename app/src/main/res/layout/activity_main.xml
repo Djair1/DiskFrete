@@ -16,7 +16,7 @@
             android:id="@+id/textView"
             android:layout_width="250dp"
             android:layout_height="100dp"
-           android:layout_marginLeft="55dp"
+            android:layout_marginLeft="55dp"
 
             android:layout_marginTop="150dp"
             android:layout_marginBottom="25dp"
@@ -27,26 +27,27 @@
             tools:ignore="MissingConstraints" />
 
         <Button
-            android:id="@+id/button9"
-            android:layout_marginLeft="10dp"
-            android:layout_width="335dp"
-            android:layout_height="76dp"
+            android:id="@+id/btEntrar"
+            android:layout_width="310dp"
+            android:layout_height="65dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="35dp"
             android:background="@android:color/holo_orange_light"
             android:text="Entrar"
             android:textColor="@android:color/background_light"
-            android:textSize="30sp"
+            android:textSize="18sp"
             tools:ignore="MissingConstraints" />
 
         <Button
-            android:id="@+id/button10"
+            android:id="@+id/btCadastrar"
+            android:layout_width="310dp"
+            android:layout_height="65dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
-            android:layout_marginLeft="10dp"
-            android:layout_width="335dp"
-            android:layout_height="76dp"
+            android:background="@android:color/background_light"
             android:text="Cadastre-se"
-            android:textSize="30sp"
-            tools:ignore="MissingConstraints"
-            />
+            android:textSize="18sp"
+            tools:ignore="MissingConstraints" />
 
 
     </LinearLayout>
