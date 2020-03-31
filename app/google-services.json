@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "468359309529",
+    "firebase_url": "https://disk-frete-45dcb.firebaseio.com",
+    "project_id": "disk-frete-45dcb",
+    "storage_bucket": "disk-frete-45dcb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:468359309529:android:816a9fca3c0482a50e76c8",
+        "android_client_info": {
+          "package_name": "com.example.diskfrete"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "468359309529-g8uk081o8oiit54veij23othhru5qcnj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.diskfrete",
+            "certificate_hash": "32269e452baa55e2b08f056f50f1d52db4c68678"
+          }
+        },
+        {
+          "client_id": "468359309529-6ruechsk8hbbgrtpe27aph8pvubn864h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.diskfrete",
+            "certificate_hash": "3beef7a94a5a9728c18ea124d8b41408e76bba3c"
+          }
+        },
+        {
+          "client_id": "468359309529-omuf436uc57nv9p8fcffqoisdkmi4o8l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXxJcZD20rkKYZzYC2JxuJ_UBkRRSMFHo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "468359309529-omuf436uc57nv9p8fcffqoisdkmi4o8l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
