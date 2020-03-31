@@ -108,11 +108,10 @@ private DatabaseReference database;
                                 } else {
                                     Toast.makeText(CadastrarUsuarioActivity.this, "Erro ao cadastrar!.",
                                             Toast.LENGTH_SHORT).show();
-                                  //  Toast.makeText(CadastrarUsuarioActivity.this, "Email!.",
-                                    //        Toast.LENGTH_SHORT).show();
+
                                 }
 
-                                // ...
+                               
                             }
                         });
             }
