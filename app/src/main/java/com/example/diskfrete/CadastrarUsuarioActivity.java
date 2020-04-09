@@ -27,7 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class CadastrarUsuarioActivity extends AppCompatActivity {
 
 private FirebaseAuth mAuth;
-private String nome ,sobrenome ,email,senha,confiSenha;
+private String nome ,sobrenome,email,senha,confiSenha;
 private DatabaseReference database;
 
     @Override
@@ -43,6 +43,7 @@ private DatabaseReference database;
 
         final EditText ednome = (EditText)findViewById(R.id.editText2);
         final EditText edSobrenome=(EditText)findViewById(R.id.editText6);
+
         final EditText edmail = (EditText)findViewById(R.id.editText3) ;
          final EditText edSenha=(EditText)findViewById(R.id.editText);
          final EditText edConfSenha = (EditText)findViewById(R.id.editText5);
@@ -62,8 +63,9 @@ private DatabaseReference database;
                 confiSenha=edConfSenha.getText().toString().trim();
 
 
+
                 if(nome.length()<=3){
-                    Toast.makeText(CadastrarUsuarioActivity.this, "usuario inválido ou vazio.",
+                    Toast.makeText(CadastrarUsuarioActivity.this, "nome inválido ou vazio.",
                             Toast.LENGTH_SHORT).show();
                 }
                 else if(sobrenome.length()>25||sobrenome.length()==0){
@@ -97,7 +99,7 @@ private DatabaseReference database;
 
             }
 
-            private void CadastrarUsuario(){
+            private void  CadastrarUsuario(){
                 mAuth.createUserWithEmailAndPassword(email, senha)
                         .addOnCompleteListener(CadastrarUsuarioActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
@@ -111,7 +113,7 @@ private DatabaseReference database;
 
                                 }
 
-                               
+
                             }
                         });
             }
@@ -122,15 +124,15 @@ private DatabaseReference database;
                 Intent it = new Intent(CadastrarUsuarioActivity.this, UsuarioHome.class);
                 it.setFlags(it.FLAG_ACTIVITY_CLEAR_TASK| it.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(it);
-                Toast.makeText(CadastrarUsuarioActivity.this, "Usuario Cadastrado com susseso", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CadastrarUsuarioActivity.this, "Motorista Cadastrado com susseso", Toast.LENGTH_SHORT).show();
                 CadastrarUsuarioNoBanco();
 
             }
 
             private void CadastrarUsuarioNoBanco() {
                 String id = database.push().getKey();
-                Usuario usuario = new Usuario(id,nome,sobrenome,email,senha);
-                database.child(id).setValue(usuario);
+                Usuario usuario = new Usuario(id,nome,sobrenome,email);
+                database.child(email).setValue(usuario);
 
 
             }

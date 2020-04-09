@@ -29,14 +29,13 @@ EditText informacoes;
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
            // String name = user.getDisplayName();
-
-            String email = user.getEmail();
+              String email = user.getEmail();
           //  Uri photoUrl = user.getPhotoUrl();
+           boolean emailVerified = user.isEmailVerified();
+              String uid = user.getUid();
 
-            boolean emailVerified = user.isEmailVerified();
 
-            String uid = user.getUid();
-informacoes.setText(email+" "+uid );
+            informacoes.setText(email+" "+uid );
 
         } else {
             Toast.makeText(UsuarioHome.this, "Erro ao buscar informações.",

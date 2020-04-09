@@ -32,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
 
         Button cadastrar = (Button)findViewById(R.id.button4);
         Button entrar = (Button)findViewById(R.id.button2);
+        Button ResetarSenha =(Button)findViewById(R.id.button3);
         Email =(EditText)findViewById(R.id.editText2);
         Senha =(EditText)findViewById(R.id.editText3);
 
@@ -42,6 +43,16 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent it = new Intent(LoginActivity.this , CadastrarUsuarioActivity.class);
+                startActivity(it);
+
+            }
+        });
+
+        ResetarSenha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent it = new Intent(LoginActivity.this , RedefinirSenha.class);
                 startActivity(it);
 
             }
