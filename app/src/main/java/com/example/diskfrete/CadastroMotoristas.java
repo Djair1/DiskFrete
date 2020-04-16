@@ -55,15 +55,22 @@ public class CadastroMotoristas extends AppCompatActivity {
 
 
                 if(nome.length()<=3){
-                    Toast.makeText(CadastroMotoristas.this, "nome inválido ou vazio.",
+                    Toast.makeText(CadastroMotoristas.this, "nome invalido.",
                             Toast.LENGTH_SHORT).show();
                 }
-                else if(sobrenome.length()>25||sobrenome.length()==0){
-                    Toast.makeText(CadastroMotoristas.this, "sobrenome inválido ou vazio",
+                else if(sobrenome.length()==0){
+                    Toast.makeText(CadastroMotoristas.this, "Campo sobrenome vazio",
                             Toast.LENGTH_SHORT).show();
-                }
-                else if(cnh.length()>11||cnh.length()==0){
+                }else if(sobrenome.length()>25) {
+                    Toast.makeText(CadastroMotoristas.this, "sobrenome muito grande",
+                            Toast.LENGTH_SHORT).show();
+
+                }else if(cnh.length()==0){
                     Toast.makeText(CadastroMotoristas.this, "CNH vazio!",
+                            Toast.LENGTH_SHORT).show();
+
+                }else if(cnh.length()>11){
+                    Toast.makeText(CadastroMotoristas.this, "CNH incompleta!",
                             Toast.LENGTH_SHORT).show();
                 }
 
@@ -84,7 +91,7 @@ public class CadastroMotoristas extends AppCompatActivity {
                 else if(Patterns.EMAIL_ADDRESS.matcher(email).matches()){
                     CadastrarMotorista();
 
-                }else{Toast.makeText(CadastroMotoristas.this, "formato de email inválido ! ",
+                }else{Toast.makeText(CadastroMotoristas.this, "email inválido ! ",
                         Toast.LENGTH_SHORT).show();}
 
 
@@ -102,7 +109,7 @@ public class CadastroMotoristas extends AppCompatActivity {
                                     carregarMotorista();
 
                                 } else {
-                                    Toast.makeText(CadastroMotoristas.this, "Erro ao cadastrar!.",
+                                    Toast.makeText(CadastroMotoristas.this, "Erro no cadastro!.",
                                             Toast.LENGTH_SHORT).show();
 
                                 }
@@ -118,7 +125,7 @@ public class CadastroMotoristas extends AppCompatActivity {
                 Intent it = new Intent(CadastroMotoristas.this, UsuarioHome.class);
                 it.setFlags(it.FLAG_ACTIVITY_CLEAR_TASK| it.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(it);
-                Toast.makeText(CadastroMotoristas.this, "Motorista Cadastrado com susseso", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CadastroMotoristas.this, "Cadastro efetuado com susseso", Toast.LENGTH_SHORT).show();
                 CadastrarMotoristaNoBanco();
 
             }

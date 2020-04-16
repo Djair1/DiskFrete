@@ -98,51 +98,51 @@
 
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginBottom="10dp"
-        android:background="@android:color/background_light"
-        android:text="ENTRAR"
-        android:textColor="@android:color/background_dark"
-        android:textSize="18sp"
-         />
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/buttom_customizado_2"
+            android:text="ENTRAR"
+            android:textColor="@android:color/background_dark"
+            android:textSize="18sp"
+    />
 
     <Button
-        android:id="@+id/button3"
+            android:id="@+id/button3"
 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
 
-        android:layout_marginStart="25dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginBottom="10dp"
-        android:background="?android:attr/textColorLinkInverse"
-        android:text="redefinir senha !"
-        android:textColor="@android:color/background_light"
-        android:textSize="14sp"
-       />
+            android:layout_marginStart="25dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/buttom_customizado_3"
+            android:text="redefinir senha !"
+            android:textColor="@android:color/background_light"
+            android:textSize="14sp"
+    />
 
     <Button
-        android:id="@+id/button4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+            android:id="@+id/button4"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
 
-        android:layout_marginStart="25dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginRight="25dp"
-        android:background="@android:color/holo_green_dark"
-        android:text="CADASTRE-SE"
-        android:textColor="@android:color/background_light"
-        android:textSize="18sp"
-        />
+            android:layout_marginStart="25dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginRight="25dp"
+            android:background="@drawable/buttom_customizado_2"
+            android:text="CADASTRE-SE"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:textSize="18sp"
+    />
 
 
 </LinearLayout>

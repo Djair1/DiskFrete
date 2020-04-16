@@ -65,21 +65,29 @@ private DatabaseReference database;
 
 
                 if(nome.length()<=3){
-                    Toast.makeText(CadastrarUsuarioActivity.this, "nome inválido ou vazio.",
+                    Toast.makeText(CadastrarUsuarioActivity.this, "nome invalido.",
                             Toast.LENGTH_SHORT).show();
                 }
-                else if(sobrenome.length()>25||sobrenome.length()==0){
-                    Toast.makeText(CadastrarUsuarioActivity.this, "sobrenome inválido ou vazio",
+                else if(sobrenome.length()==0){
+                    Toast.makeText(CadastrarUsuarioActivity.this, "Campo sobrenome vazio",
                             Toast.LENGTH_SHORT).show();
+                }else if(sobrenome.length()>25){
+                    Toast.makeText(CadastrarUsuarioActivity.this, "sobrenome muito grande",
+                            Toast.LENGTH_SHORT).show();
+
                 }
 
                 else if(email.length()== 0){
-                    Toast.makeText(CadastrarUsuarioActivity.this, "Email vazio!",
+                    Toast.makeText(CadastrarUsuarioActivity.this, "Campo Email vazio!",
                             Toast.LENGTH_SHORT).show();
                 }
 
                 else if (senha.length()== 0){
-                    Toast.makeText(CadastrarUsuarioActivity.this, " insera a senha. ",
+                    Toast.makeText(CadastrarUsuarioActivity.this, "entre com a senha. ",
+                            Toast.LENGTH_SHORT).show();
+                }
+                else if (senha.length()< 6){
+                    Toast.makeText(CadastrarUsuarioActivity.this, "inserir senha com pelo menos 6 Digitos. ",
                             Toast.LENGTH_SHORT).show();
                 }
 
@@ -90,7 +98,7 @@ private DatabaseReference database;
                else if(Patterns.EMAIL_ADDRESS.matcher(email).matches()){
                     CadastrarUsuario();
 
-                }else{Toast.makeText(CadastrarUsuarioActivity.this, "formato de email inválido ! ",
+                }else{Toast.makeText(CadastrarUsuarioActivity.this, " email inválido ! ",
                         Toast.LENGTH_SHORT).show();}
 
 
@@ -108,7 +116,7 @@ private DatabaseReference database;
                                     carregarUsuario();
 
                                 } else {
-                                    Toast.makeText(CadastrarUsuarioActivity.this, "Erro ao cadastrar!.",
+                                    Toast.makeText(CadastrarUsuarioActivity.this, "Erro no cadastro !.",
                                             Toast.LENGTH_SHORT).show();
 
                                 }
@@ -124,7 +132,7 @@ private DatabaseReference database;
                 Intent it = new Intent(CadastrarUsuarioActivity.this, UsuarioHome.class);
                 it.setFlags(it.FLAG_ACTIVITY_CLEAR_TASK| it.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(it);
-                Toast.makeText(CadastrarUsuarioActivity.this, "Motorista Cadastrado com susseso", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CadastrarUsuarioActivity.this, "Cadastro efetuado com susseso", Toast.LENGTH_SHORT).show();
                 CadastrarUsuarioNoBanco();
 
             }

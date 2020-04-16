@@ -111,8 +111,8 @@ public class LoginMotorista extends AppCompatActivity {
             private void validarCnh(String emeil,String cnh) {
                 if (email.equals(emeil) && CNH.equals(cnh)){
                     LogarMotorista();
-                }else Toast.makeText(LoginMotorista.this, " Motorista não encontrado ! ",
-                        Toast.LENGTH_SHORT).show();
+                }else{ Toast.makeText(LoginMotorista.this, " Motorista não encontrado ! ",
+                        Toast.LENGTH_SHORT).show();}
 
 
             }
@@ -168,7 +168,7 @@ public class LoginMotorista extends AppCompatActivity {
 
 
             private void  carregarMotorista() {
-                Intent it = new Intent(LoginMotorista.this, UsuarioHome.class);
+                Intent it = new Intent(LoginMotorista.this, MotoristaDiskFrete.class);
                 it.setFlags(it.FLAG_ACTIVITY_CLEAR_TASK| it.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(it);
             }
