@@ -1,148 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/relativeLayout2"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@mipmap/fundo"
-    android:orientation="vertical"
-    tools:context=".LoginMotorista">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:id="@+id/relativeLayout2"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   android:background="@mipmap/caminha1"
+                                                   tools:context=".LoginMotorista">
 
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginLeft="25dp"
-        android:text="DISK FRETE"
-        android:textColor="@color/common_google_signin_btn_text_dark_focused"
-        android:textSize="45dp"
-        android:textStyle="bold"
-       />
+            android:id="@+id/textView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="DISK FRETE"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:textSize="40dp"
+            android:textStyle="bold"
+            android:layout_marginBottom="30dp"
+            app:layout_constraintBottom_toTopOf="@+id/textView2" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="50dp"
+            android:layout_marginStart="50dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp" android:layout_marginTop="15dp"/>
 
 
     <TextView
-        android:id="@+id/textView2"
-       android:layout_marginTop="30dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:text="EMAIL"
-        android:textColor="@color/common_google_signin_btn_text_dark_focused"
-        />
+            android:id="@+id/textView2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="EMAIL"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            app:layout_constraintTop_toBottomOf="@+id/textView" android:layout_marginBottom="45dp"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toTopOf="@+id/textView3"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"/>
 
     <EditText
-        android:id="@+id/editText2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+            android:id="@+id/editText2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
 
-        android:layout_marginStart="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginRight="15dp"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        android:textColor="@color/common_google_signin_btn_text_dark_focused"
-         />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
-
-        android:text="CNH"
-        android:textColor="@color/common_google_signin_btn_text_dark_focused"
-         />
-    <EditText
-        android:id="@+id/editText4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginRight="15dp"
-        android:ems="10"
-        android:inputType="number"
-        android:textColor="@color/common_google_signin_btn_text_dark_focused"
-        />
-
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginBottom="1dp"
+            app:layout_constraintBottom_toTopOf="@+id/textView3" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="15dp" android:layout_marginStart="15dp" android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"/>
 
     <TextView
-        android:id="@+id/textView8"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
+            android:id="@+id/textView3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
 
-        android:text="SENHA"
-        android:textColor="@color/common_google_signin_btn_text_dark_focused"
-        />
+            android:text="CNH"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" android:layout_marginBottom="45dp"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toTopOf="@+id/textView8"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"/>
+    <EditText
+            android:id="@+id/editText4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginBottom="1dp"
+            app:layout_constraintBottom_toTopOf="@+id/textView8" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="15dp" android:layout_marginStart="15dp" android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"/>
+
+
+    <TextView
+            android:id="@+id/textView8"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:text="SENHA"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" android:layout_marginBottom="75dp"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toTopOf="@+id/button2"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"/>
 
     <EditText
-        android:id="@+id/editText3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="30dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:textColor="@color/common_google_signin_btn_text_dark_focused"
-        />
+            android:id="@+id/editText3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:layout_marginTop="18dp" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView8" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="15dp" android:layout_marginStart="15dp" android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"/>
 
 
     <Button
             android:id="@+id/button2"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginStart="25dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginBottom="10dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:background="@drawable/buttom_customizado_2"
             android:text="ENTRAR"
             android:textColor="@android:color/background_dark"
             android:textSize="18sp"
-    />
+            app:layout_constraintTop_toBottomOf="@+id/textView8" android:layout_marginBottom="9dp"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toTopOf="@+id/button3"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="25dp"
+            android:layout_marginStart="25dp" android:layout_marginEnd="25dp" android:layout_marginRight="25dp"/>
 
     <Button
             android:id="@+id/button3"
 
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
 
-            android:layout_marginStart="25dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginBottom="10dp"
             android:background="@drawable/buttom_customizado_3"
             android:text="redefinir senha !"
             android:textColor="@android:color/background_light"
             android:textSize="14sp"
-    />
+            app:layout_constraintTop_toBottomOf="@+id/button2" android:layout_marginBottom="11dp"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toTopOf="@+id/button4"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="25dp"
+            android:layout_marginStart="25dp" android:layout_marginEnd="25dp" android:layout_marginRight="25dp"/>
 
     <Button
             android:id="@+id/button4"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
 
-            android:layout_marginStart="25dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginRight="25dp"
             android:background="@drawable/buttom_customizado_2"
             android:text="CADASTRE-SE"
             android:textColor="@color/common_google_signin_btn_text_dark_focused"
             android:textSize="18sp"
-    />
+            app:layout_constraintTop_toBottomOf="@+id/button3" android:layout_marginBottom="52dp"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="25dp" app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="25dp" android:layout_marginEnd="25dp" android:layout_marginRight="25dp"/>
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
