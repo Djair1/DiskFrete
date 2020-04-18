@@ -1,5 +1,7 @@
 package com.example.diskfrete;
 
+import android.app.ProgressDialog;
+import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,8 +39,9 @@ public class LoginMotorista extends AppCompatActivity {
     private String email,senha,CNH;
     FirebaseAuth firebaseAuth;
     private DatabaseReference database;
+    private ProgressDialog barraDeProgresso;
 
-   // private List<Motorista> listaDeMotoristas=new ArrayList<Motorista>();
+
 
 
     @Override
@@ -54,8 +57,10 @@ public class LoginMotorista extends AppCompatActivity {
         Button ResetarSenha=(Button)findViewById(R.id.button3);
 
 
+
         firebaseAuth=FirebaseAuth.getInstance();
         database= FirebaseDatabase.getInstance().getReference("Motoristas");
+        barraDeProgresso = new ProgressDialog(this);
 
 
 
@@ -122,12 +127,12 @@ public class LoginMotorista extends AppCompatActivity {
                 database.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                       // listaDeMotoristas.clear();
+
 
                         for(DataSnapshot objSnapshot :dataSnapshot.getChildren()){
 
                             Motorista motorista = objSnapshot.getValue(Motorista.class);
-                         //   listaDeMotoristas.add(motorista);
+
                             validarCnh(motorista.getEmail(),motorista.getCnh());
 
                         }
@@ -146,16 +151,21 @@ public class LoginMotorista extends AppCompatActivity {
 
 
             private void LogarMotorista(){
-                firebaseAuth.signInWithEmailAndPassword(email, senha)
+                barraDeProgresso.setTitle("Bem Vindo");
+                barraDeProgresso.setMessage("conectando...");
+                barraDeProgresso.setCanceledOnTouchOutside(false);
+                barraDeProgresso.show();
+                 firebaseAuth.signInWithEmailAndPassword(email, senha)
                         .addOnCompleteListener(LoginMotorista.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
+
                                 if (task.isSuccessful()) {
                                     carregarMotorista();
 
                                 } else {
 
-
+                                    barraDeProgresso.dismiss();
                                     Toast.makeText(LoginMotorista.this, "Erro ao realizar Login.",
                                             Toast.LENGTH_SHORT).show();
 
@@ -168,9 +178,11 @@ public class LoginMotorista extends AppCompatActivity {
 
 
             private void  carregarMotorista() {
+               // progresso.setProgress(60);
                 Intent it = new Intent(LoginMotorista.this, MotoristaDiskFrete.class);
                 it.setFlags(it.FLAG_ACTIVITY_CLEAR_TASK| it.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(it);
+              //  progresso.setProgress(0);
             }
 
 

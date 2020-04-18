@@ -1,5 +1,6 @@
 package com.example.diskfrete;
 
+import android.app.ProgressDialog;
 import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,37 +23,74 @@ public class UsuarioHome extends AppCompatActivity {
     private DatabaseReference database;
     private List<String> listaDemotoristas= new ArrayList<>();
     private ArrayAdapter<String>adapterMotorista;
+    private ProgressDialog barraDeProgresso;
+    private ListView lista;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usuario_home);
-
         database= FirebaseDatabase.getInstance().getReference("Motoristas");
 
 
 
-        final ListView lista =(ListView)findViewById(R.id.lista);
+         lista =(ListView)findViewById(R.id.lista);
+         barraDeProgresso = new ProgressDialog(this);
 
 
+         carregarMotoristas();
+
+
+
+}
+
+    private void buscarCurrentUser() {
+
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // String name = user.getDisplayName();
+            String email = user.getEmail();
+            //  Uri photoUrl = user.getPhotoUrl();
+            boolean emailVerified = user.isEmailVerified();
+            String uid = user.getUid();
+
+        } else {
+            Toast.makeText(UsuarioHome.this, "Erro ao buscar informações.",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void progressobarra() {
+        barraDeProgresso.setTitle("Bem Vindo");
+        barraDeProgresso.setMessage("carregando...");
+        barraDeProgresso.setCanceledOnTouchOutside(false);
+        barraDeProgresso.show();
+    }
+
+    private void carregarMotoristas() {
+        progressobarra();
         database.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 listaDemotoristas.clear();
 
-                for(DataSnapshot objSnapshot :dataSnapshot.getChildren()){
+
+                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
 
                     Motorista motorista = objSnapshot.getValue(Motorista.class);
 
-                    listaDemotoristas.add(motorista.getNome()+" "+motorista.getSobrenome());
-
+                    listaDemotoristas.add(motorista.getNome() + " " + motorista.getSobrenome());
 
 
                 }
-adapterMotorista = new ArrayAdapter<String>(UsuarioHome.this,android.R.layout.simple_list_item_1,listaDemotoristas);
+                adapterMotorista = new ArrayAdapter<String>(UsuarioHome.this, android.R.layout.simple_list_item_1, listaDemotoristas);
 
                 lista.setAdapter(adapterMotorista);
+                barraDeProgresso.dismiss();
+
             }
 
             @Override
@@ -61,31 +99,5 @@ adapterMotorista = new ArrayAdapter<String>(UsuarioHome.this,android.R.layout.si
             }
         });
 
-
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-           // String name = user.getDisplayName();
-              String email = user.getEmail();
-          //  Uri photoUrl = user.getPhotoUrl();
-           boolean emailVerified = user.isEmailVerified();
-              String uid = user.getUid();
-
- } else {
-            Toast.makeText(UsuarioHome.this, "Erro ao buscar informações.",
-                    Toast.LENGTH_SHORT).show();
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-}
+    }
 }

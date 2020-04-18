@@ -1,114 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:orientation="vertical"
-    tools:context=".CadastrarUsuarioActivity">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   android:background="#FFFFFF"
+                                                   tools:context=".CadastrarUsuarioActivity"
+                                                   android:id="@+id/linearLayout2">
 
     <TextView
             android:id="@+id/textView"
-            android:layout_width="match_parent"
+            android:layout_width="245dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginLeft="60dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="15dp"
 
 
-            android:layout_marginRight="15dp"
             android:text="DISK FRETE"
             android:textColor="#616F7C"
             android:textSize="35dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:layout_marginTop="24dp" android:layout_marginBottom="51dp" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/editText2" app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginEnd="15dp" android:layout_marginRight="15dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="65dp"
+            android:layout_marginStart="65dp"/>
 
     <EditText
             android:id="@+id/editText2"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginRight="15dp"
 
             android:ems="10"
             android:hint="nome"
             android:inputType="text"
-            android:textColor="#363636"/>
+            android:textColor="#363636"
+            app:layout_constraintTop_toBottomOf="@+id/textView" android:layout_marginBottom="45dp"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toTopOf="@+id/editText3"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp" android:layout_marginEnd="15dp" android:layout_marginRight="15dp"/>
 
     <EditText
             android:id="@+id/editText6"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginRight="15dp"
 
             android:ems="10"
             android:hint="Sobrenome"
             android:inputType="text"
-            android:textColor="#363636"/>
+            android:textColor="#363636"
+            app:layout_constraintTop_toBottomOf="@+id/editText2" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp" android:layout_marginEnd="15dp" android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp"
+    />
 
 
     <EditText
             android:id="@+id/editText3"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginRight="15dp"
 
 
             android:ems="10"
             android:hint="E-mail"
             android:inputType="textEmailAddress"
-            android:textColor="#363636"/>
+            android:textColor="#363636"
+            app:layout_constraintTop_toBottomOf="@+id/editText2" android:layout_marginBottom="50dp"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toTopOf="@+id/editText5"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp" android:layout_marginEnd="15dp" android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp"/>
 
     <EditText
             android:id="@+id/editText"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginRight="15dp"
             android:ems="10"
             android:hint="Senha"
             android:inputType="textPassword"
-            android:textColor="#363636"/>
+            android:textColor="#363636"
+            app:layout_constraintTop_toBottomOf="@+id/editText3" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp" android:layout_marginEnd="15dp" android:layout_marginRight="15dp"/>
 
     <EditText
             android:id="@+id/editText5"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginRight="15dp"
             android:ems="10"
             android:hint="Confirmar Senha"
             android:inputType="textPassword"
-            android:textColor="#363636"/>
+            android:textColor="#363636"
+            app:layout_constraintTop_toBottomOf="@+id/editText3" android:layout_marginBottom="50dp"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toTopOf="@+id/button2"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp" android:layout_marginEnd="15dp" android:layout_marginRight="15dp"
+            android:layout_marginTop="1dp"/>
 
 
     <Button
             android:id="@+id/button2"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginRight="15dp"
             android:background="@drawable/buttom_customizado_3"
             android:text="ENTRAR"
             android:textColor="@android:color/background_light"
-            android:textSize="18sp"/>
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@+id/editText5" android:layout_marginBottom="122dp"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="15dp" app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="15dp" android:layout_marginEnd="15dp" android:layout_marginRight="15dp"/>
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

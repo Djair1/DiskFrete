@@ -1,5 +1,7 @@
 package com.example.diskfrete;
 
+import android.app.ProgressDialog;
+import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,7 +25,7 @@ public class CadastroMotoristas extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private String nome ,sobrenome ,email,cnh,senha,confiSenha;
     private DatabaseReference database;
-
+    private ProgressDialog barraDeProgresso;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,7 @@ public class CadastroMotoristas extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         database= FirebaseDatabase.getInstance().getReference("Motoristas");
+        barraDeProgresso = new ProgressDialog(this);
 
 
         final EditText ednome = (EditText)findViewById(R.id.editText2);
@@ -41,6 +44,7 @@ public class CadastroMotoristas extends AppCompatActivity {
         final EditText edSenha=(EditText)findViewById(R.id.editText6);
         final EditText edConfSenha = (EditText)findViewById(R.id.editText7);
         final  Button btcadastrar =(Button)findViewById(R.id.button2);
+
 
         btcadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,14 +105,20 @@ public class CadastroMotoristas extends AppCompatActivity {
             }
 
             private void  CadastrarMotorista(){
+                barraDeProgresso.setTitle("Bem Vindo");
+                barraDeProgresso.setMessage("conectando...");
+                barraDeProgresso.setCanceledOnTouchOutside(false);
+                barraDeProgresso.show();
                 mAuth.createUserWithEmailAndPassword(email, senha)
                         .addOnCompleteListener(CadastroMotoristas.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
+
                                 if (task.isSuccessful()) {
                                     carregarMotorista();
 
                                 } else {
+                                    barraDeProgresso.dismiss();
                                     Toast.makeText(CadastroMotoristas.this, "Erro no cadastro!.",
                                             Toast.LENGTH_SHORT).show();
 
@@ -144,4 +154,6 @@ public class CadastroMotoristas extends AppCompatActivity {
 
 
     }
+
+
 }

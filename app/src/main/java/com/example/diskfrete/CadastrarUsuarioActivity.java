@@ -1,34 +1,36 @@
 package com.example.diskfrete;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.nfc.Tag;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
-
-
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class CadastrarUsuarioActivity extends AppCompatActivity {
 
 private FirebaseAuth mAuth;
 private String nome ,sobrenome,email,senha,confiSenha;
 private DatabaseReference database;
+    public static final  String Usuario_PREFERENCES="login automatico";
+    private ProgressDialog barraDeProgresso;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +39,18 @@ private DatabaseReference database;
 
         mAuth = FirebaseAuth.getInstance();
         database= FirebaseDatabase.getInstance().getReference("Usuarios");
+        barraDeProgresso = new ProgressDialog(this);
 
+
+        SharedPreferences prefs=getSharedPreferences(Usuario_PREFERENCES,MODE_PRIVATE);
+        email=prefs.getString("email",null);
+        if(email!=null){
+
+            Intent it = new Intent(CadastrarUsuarioActivity.this, UsuarioHome.class);
+            it.setFlags(it.FLAG_ACTIVITY_CLEAR_TASK | it.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(it);
+
+        }
 
 
 
@@ -108,14 +121,20 @@ private DatabaseReference database;
             }
 
             private void  CadastrarUsuario(){
+                barraDeProgresso.setTitle("Bem Vindo");
+                barraDeProgresso.setMessage("conectando...");
+                barraDeProgresso.setCanceledOnTouchOutside(false);
+                barraDeProgresso.show();
                 mAuth.createUserWithEmailAndPassword(email, senha)
                         .addOnCompleteListener(CadastrarUsuarioActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
+
                                 if (task.isSuccessful()) {
                                     carregarUsuario();
 
                                 } else {
+                                    barraDeProgresso.dismiss();
                                     Toast.makeText(CadastrarUsuarioActivity.this, "Erro no cadastro !.",
                                             Toast.LENGTH_SHORT).show();
 
@@ -129,12 +148,14 @@ private DatabaseReference database;
 
 
             private void carregarUsuario() {
+                SharedPreferences.Editor editor = getSharedPreferences(Usuario_PREFERENCES,MODE_PRIVATE).edit();
+                editor.putString("email",email);
+                editor.commit();
                 Intent it = new Intent(CadastrarUsuarioActivity.this, UsuarioHome.class);
                 it.setFlags(it.FLAG_ACTIVITY_CLEAR_TASK| it.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(it);
                 Toast.makeText(CadastrarUsuarioActivity.this, "Cadastro efetuado com susseso", Toast.LENGTH_SHORT).show();
                 CadastrarUsuarioNoBanco();
-
             }
 
             private void CadastrarUsuarioNoBanco() {
@@ -147,4 +168,6 @@ private DatabaseReference database;
         });
 
         }
+
+
 }
