@@ -6,7 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
+import com.example.diskfrete.Motorista.LoginMotorista;
+import com.example.diskfrete.Usuario.LoginActivity;
 
 
 public class MainActivity extends AppCompatActivity {

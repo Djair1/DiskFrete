@@ -1,4 +1,4 @@
-package com.example.diskfrete;
+package com.example.diskfrete.Usuario;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -8,10 +8,10 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import com.example.diskfrete.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -19,14 +19,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 public class CadastrarUsuarioActivity extends AppCompatActivity {
 
 private FirebaseAuth mAuth;
-private String nome ,sobrenome,email,senha,confiSenha;
+private String nomeCompleto ,cidade,email,senha,confiSenha;
 private DatabaseReference database;
     public static final  String Usuario_PREFERENCES="login automatico";
     private ProgressDialog barraDeProgresso;
@@ -54,8 +50,8 @@ private DatabaseReference database;
 
 
 
-        final EditText ednome = (EditText)findViewById(R.id.editText2);
-        final EditText edSobrenome=(EditText)findViewById(R.id.editText6);
+        final EditText ednomeCompleto = (EditText)findViewById(R.id.editText2);
+        final EditText edCidade=(EditText)findViewById(R.id.editText6);
 
         final EditText edmail = (EditText)findViewById(R.id.editText3) ;
          final EditText edSenha=(EditText)findViewById(R.id.editText);
@@ -71,20 +67,20 @@ private DatabaseReference database;
             public void onClick(View v) {
                 email = edmail.getText().toString().trim();
                 senha = edSenha.getText().toString().trim();
-                nome = ednome.getText().toString().trim();
-                sobrenome= edSobrenome.getText().toString().trim();
+                nomeCompleto = ednomeCompleto.getText().toString().trim();
+               cidade= edCidade.getText().toString().trim();
                 confiSenha=edConfSenha.getText().toString().trim();
 
 
 
-                if(nome.length()<=3){
+                if(nomeCompleto.length()<=3){
                     Toast.makeText(CadastrarUsuarioActivity.this, "nome invalido.",
                             Toast.LENGTH_SHORT).show();
                 }
-                else if(sobrenome.length()==0){
+                else if(cidade.length()==0){
                     Toast.makeText(CadastrarUsuarioActivity.this, "Campo sobrenome vazio",
                             Toast.LENGTH_SHORT).show();
-                }else if(sobrenome.length()>25){
+                }else if(cidade.length()>25){
                     Toast.makeText(CadastrarUsuarioActivity.this, "sobrenome muito grande",
                             Toast.LENGTH_SHORT).show();
 
@@ -121,7 +117,7 @@ private DatabaseReference database;
             }
 
             private void  CadastrarUsuario(){
-                barraDeProgresso.setTitle("Bem Vindo");
+                barraDeProgresso.setTitle("");
                 barraDeProgresso.setMessage("conectando...");
                 barraDeProgresso.setCanceledOnTouchOutside(false);
                 barraDeProgresso.show();
@@ -160,8 +156,8 @@ private DatabaseReference database;
 
             private void CadastrarUsuarioNoBanco() {
                 String id = database.push().getKey();
-                Usuario usuario = new Usuario(id,nome,sobrenome,email);
-                database.child(email).setValue(usuario);
+                Usuario usuario = new Usuario(id,nomeCompleto,cidade,email);
+                database.child(id).setValue(usuario);
 
 
             }

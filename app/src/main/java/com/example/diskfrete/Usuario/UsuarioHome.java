@@ -1,16 +1,14 @@
-package com.example.diskfrete;
+package com.example.diskfrete.Usuario;
 
 import android.app.ProgressDialog;
 import android.widget.*;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 
-import androidx.collection.ArraySet;
+import com.example.diskfrete.Motorista.Motorista;
+import com.example.diskfrete.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;
@@ -82,7 +80,7 @@ public class UsuarioHome extends AppCompatActivity {
 
                     Motorista motorista = objSnapshot.getValue(Motorista.class);
 
-                    listaDemotoristas.add(motorista.getNome() + " " + motorista.getSobrenome());
+                    listaDemotoristas.add(motorista.getNomeCompleto()+"\n"+motorista.getEmail()+"\n"+motorista.getTelefone());
 
 
                 }

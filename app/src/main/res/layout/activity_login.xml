@@ -6,7 +6,7 @@
                                                    android:layout_width="match_parent"
                                                    android:layout_height="match_parent"
                                                    android:background="@mipmap/fundo3"
-                                                   tools:context=".LoginActivity">
+                                                   tools:context=".Usuario.LoginActivity">
 
 
     <TextView
@@ -113,12 +113,12 @@
             android:layout_marginLeft="25dp"
             android:layout_marginEnd="25dp"
             android:layout_marginRight="25dp"
-            android:text="redefinir a senha !"
-            android:textColor="@android:color/white"
+            android:text="redefinir  senha !"
+            android:textColor="@color/common_google_signin_btn_text_light_pressed"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:background="@drawable/buttom_customizado_3"
+            android:background="@drawable/buttom_customizado_2"
             app:layout_constraintHorizontal_bias="0.0" app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="70dp"/>
     <Button

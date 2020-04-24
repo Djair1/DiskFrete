@@ -9,16 +9,14 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/NoActionBar">
-        <activity android:name=".Trasicao">
-        </activity>
-        <activity android:name=".MotoristaDiskFrete">
+        <activity android:name=".Motorista.MotoristaDiskFrete">
         </activity>
         <activity android:name=".RedefinirSenha"/>
-        <activity android:name=".UsuarioHome"/>
-        <activity android:name=".LoginMotorista"/>
-        <activity android:name=".CadastroMotoristas"/>
-        <activity android:name=".CadastrarUsuarioActivity"/>
-        <activity android:name=".LoginActivity"/>
+        <activity android:name=".Usuario.UsuarioHome"/>
+        <activity android:name=".Motorista.LoginMotorista"/>
+        <activity android:name=".Motorista.CadastroMotoristas"/>
+        <activity android:name=".Usuario.CadastrarUsuarioActivity"/>
+        <activity android:name=".Usuario.LoginActivity"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

@@ -1,45 +1,33 @@
-package com.example.diskfrete;
+package com.example.diskfrete.Motorista;
 
 import android.app.ProgressDialog;
-import android.widget.ProgressBar;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import com.example.diskfrete.R;
+import com.example.diskfrete.RedefinirSenha;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Map;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
+import com.google.firebase.database.*;
 
 public class LoginMotorista extends AppCompatActivity {
 
-    EditText Email, Senha,Cnh;
+    EditText Email, Senha,Cpf;
     Button Entrar;
-    private String email,senha,CNH;
+    private String email,senha,cpf;
     FirebaseAuth firebaseAuth;
     private DatabaseReference database;
     private ProgressDialog barraDeProgresso;
+    public static final  String Motorista_PREFERENCES="login automatico";
+
 
 
 
@@ -49,9 +37,10 @@ public class LoginMotorista extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_motorista);
 
+
         Email =(EditText)findViewById(R.id.editText2);
         Senha =(EditText)findViewById(R.id.editText3);
-        Cnh =(EditText)findViewById(R.id.editText4);
+        Cpf =(EditText)findViewById(R.id.editText4);
         Entrar=(Button)findViewById(R.id.button2);
         Button cadastrar = (Button)findViewById(R.id.button4);
         Button ResetarSenha=(Button)findViewById(R.id.button3);
@@ -63,7 +52,14 @@ public class LoginMotorista extends AppCompatActivity {
         barraDeProgresso = new ProgressDialog(this);
 
 
+        SharedPreferences prefs=getSharedPreferences(Motorista_PREFERENCES,MODE_PRIVATE);
+        cpf=prefs.getString("cpf",null);
+        if(cpf!=null){
 
+            Intent it = new Intent(LoginMotorista.this, MotoristaDiskFrete.class);
+            it.setFlags(it.FLAG_ACTIVITY_CLEAR_TASK| it.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(it);
+        }
 
 
 
@@ -93,15 +89,15 @@ public class LoginMotorista extends AppCompatActivity {
             public void onClick(View v) {
                 email = Email.getText().toString().trim();
                 senha = Senha.getText().toString().trim();
-                 CNH = Cnh.getText().toString().trim();
+                 cpf = Cpf.getText().toString().trim();
 
 
                 if(email.length()== 0){
                     Toast.makeText(LoginMotorista.this, "Email Invalido ou vazio!",
                             Toast.LENGTH_SHORT).show();
                 }
-             else if(CNH.length()==0){
-                    Toast.makeText(LoginMotorista.this, "CNH Invalido ou vazio!",
+             else if(cpf.length()==0){
+                    Toast.makeText(LoginMotorista.this, "CPF Invalido ou vazio!",
                             Toast.LENGTH_SHORT).show();
                 }
 
@@ -113,8 +109,8 @@ public class LoginMotorista extends AppCompatActivity {
 
             }
 
-            private void validarCnh(String emeil,String cnh) {
-                if (email.equals(emeil) && CNH.equals(cnh)){
+            private void validarCpf(String e,String c) {
+                if (email.equals(e) && cpf.equals(c)){
                     LogarMotorista();
                 }else{ Toast.makeText(LoginMotorista.this, " Motorista não encontrado ! ",
                         Toast.LENGTH_SHORT).show();}
@@ -133,7 +129,7 @@ public class LoginMotorista extends AppCompatActivity {
 
                             Motorista motorista = objSnapshot.getValue(Motorista.class);
 
-                            validarCnh(motorista.getEmail(),motorista.getCnh());
+                            validarCpf(motorista.getEmail(),motorista.getCpf());
 
                         }
 
@@ -151,7 +147,7 @@ public class LoginMotorista extends AppCompatActivity {
 
 
             private void LogarMotorista(){
-                barraDeProgresso.setTitle("Bem Vindo");
+                barraDeProgresso.setTitle("");
                 barraDeProgresso.setMessage("conectando...");
                 barraDeProgresso.setCanceledOnTouchOutside(false);
                 barraDeProgresso.show();
@@ -178,11 +174,13 @@ public class LoginMotorista extends AppCompatActivity {
 
 
             private void  carregarMotorista() {
-               // progresso.setProgress(60);
+                SharedPreferences.Editor editor = getSharedPreferences( Motorista_PREFERENCES,MODE_PRIVATE).edit();
+                editor.putString("cpf",cpf);
+                editor.commit();
                 Intent it = new Intent(LoginMotorista.this, MotoristaDiskFrete.class);
                 it.setFlags(it.FLAG_ACTIVITY_CLEAR_TASK| it.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(it);
-              //  progresso.setProgress(0);
+
             }
 
 
