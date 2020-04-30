@@ -38,17 +38,6 @@ private DatabaseReference database;
         barraDeProgresso = new ProgressDialog(this);
 
 
-        SharedPreferences prefs=getSharedPreferences(Usuario_PREFERENCES,MODE_PRIVATE);
-        email=prefs.getString("email",null);
-        if(email!=null){
-
-            Intent it = new Intent(CadastrarUsuarioActivity.this, UsuarioHome.class);
-            it.setFlags(it.FLAG_ACTIVITY_CLEAR_TASK | it.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(it);
-
-        }
-
-
 
         final EditText ednomeCompleto = (EditText)findViewById(R.id.editText2);
         final EditText edCidade=(EditText)findViewById(R.id.editText6);
@@ -74,17 +63,14 @@ private DatabaseReference database;
 
 
                 if(nomeCompleto.length()<=3){
-                    Toast.makeText(CadastrarUsuarioActivity.this, "nome invalido.",
+                    Toast.makeText(CadastrarUsuarioActivity.this, "por favor inserir nome completo.",
                             Toast.LENGTH_SHORT).show();
                 }
                 else if(cidade.length()==0){
-                    Toast.makeText(CadastrarUsuarioActivity.this, "Campo sobrenome vazio",
+                    Toast.makeText(CadastrarUsuarioActivity.this, "Campo cidade vazio",
                             Toast.LENGTH_SHORT).show();
-                }else if(cidade.length()>25){
-                    Toast.makeText(CadastrarUsuarioActivity.this, "sobrenome muito grande",
-                            Toast.LENGTH_SHORT).show();
-
                 }
+
 
                 else if(email.length()== 0){
                     Toast.makeText(CadastrarUsuarioActivity.this, "Campo Email vazio!",

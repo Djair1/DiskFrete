@@ -4,7 +4,9 @@
                                                    xmlns:tools="http://schemas.android.com/tools"
                                                    android:layout_width="match_parent"
                                                    android:layout_height="match_parent"
-                                                   tools:context=".Motorista.CadastroMotoristas" android:id="@+id/linearLayout">
+                                                   tools:context=".Motorista.CadastroMotoristas"
+                                                   android:id="@+id/linearLayout"
+>
 
     <TextView
             android:id="@+id/textView"
@@ -21,127 +23,157 @@
             android:layout_marginTop="5dp"
             app:layout_constraintTop_toTopOf="parent"/>
 
-
-    <EditText
-            android:id="@+id/editText2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Nome Completo"
-            android:inputType="text"
-            android:textColor="#363636"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="15dp"
-            android:layout_marginStart="15dp" android:layout_marginEnd="15dp" android:layout_marginRight="15dp"
-            app:layout_constraintTop_toBottomOf="@+id/textView"/>
-    <EditText
-            android:id="@+id/editText4"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="CPF"
-            android:inputType="number"
-            android:textColor="#363636"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="15dp" android:layout_marginStart="15dp" android:layout_marginEnd="15dp"
-            android:layout_marginRight="15dp"
-            app:layout_constraintTop_toBottomOf="@+id/editText2"/>
-
-
-    <EditText
-            android:id="@+id/editText5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:ems="11"
-            android:hint="telefone celular"
-            android:inputType="phone"
-            android:textColor="#363636"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="15dp"
-            android:layout_marginStart="15dp" android:layout_marginEnd="15dp" android:layout_marginRight="15dp"
-            android:layout_marginTop="-1dp" app:layout_constraintTop_toBottomOf="@+id/editText4"/>
-    <EditText
-            android:id="@+id/editText3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="E-mail"
-            android:inputType="textEmailAddress"
-            android:textColor="#363636"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="15dp"
-            android:layout_marginStart="15dp" android:layout_marginEnd="15dp" android:layout_marginRight="15dp"
-            app:layout_constraintTop_toBottomOf="@+id/editText5"/>
-
-
-    <EditText
-            android:id="@+id/editText6"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:ems="11"
-            android:hint="Senha"
-            android:inputType="textPassword"
-            android:textColor="#363636"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="15dp" android:layout_marginStart="15dp" android:layout_marginEnd="15dp"
-            android:layout_marginRight="15dp"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintTop_toBottomOf="@+id/editText11"/>
-    <EditText
-            android:id="@+id/editText7"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:ems="11"
-            android:hint="Confirmar senha"
-            android:inputType="textPassword"
-            android:textColor="#363636"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="15dp"
-            android:layout_marginStart="15dp" android:layout_marginEnd="15dp" android:layout_marginRight="15dp"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintTop_toBottomOf="@+id/editText6"/>
-    <Button
-            android:id="@+id/button2"
+    <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@drawable/buttom_customizado_2"
-            android:text="ENTRAR"
-            android:textColor="@color/common_google_signin_btn_text_light_default"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="15dp"
-            android:layout_marginStart="15dp" android:layout_marginEnd="15dp" android:layout_marginRight="15dp"
-            app:layout_constraintHorizontal_bias="0.0" android:layout_marginTop="5dp"
-            app:layout_constraintTop_toBottomOf="@+id/editText7"/>
-    <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:ems="10"
-            android:id="@+id/editText9"
-            app:layout_constraintTop_toBottomOf="@+id/editText10" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="15dp" android:layout_marginStart="15dp"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="15dp"
-            android:layout_marginEnd="15dp" android:hint="Tipo de veiculo"/>
-    <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:ems="10"
-            android:id="@+id/editText10"
-            app:layout_constraintTop_toBottomOf="@+id/editText3" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="15dp" android:layout_marginRight="15dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="15dp"
-            android:layout_marginStart="15dp" android:hint="Placa do veiculo"/>
-    <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:ems="10"
-            android:id="@+id/editText11"
-            app:layout_constraintTop_toBottomOf="@+id/editText9" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="15dp" android:layout_marginStart="15dp" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="15dp" android:layout_marginRight="15dp" android:hint="Tipo de carroceria"/>
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/button7"
+            android:layout_marginTop="25dp" android:layout_marginBottom="25dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <EditText
+                    android:id="@+id/editText2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Nome Completo"
+                    android:inputType="text"
+                    android:textColor="#363636"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="15dp"
+                    android:layout_marginStart="15dp" android:layout_marginEnd="15dp" android:layout_marginRight="15dp"
+                    app:layout_constraintTop_toTopOf="parent"/>
+            <EditText
+                    android:id="@+id/editText4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="CPF"
+                    android:inputType="number"
+                    android:textColor="#363636"
+                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginLeft="15dp" android:layout_marginStart="15dp" android:layout_marginEnd="15dp"
+                    android:layout_marginRight="15dp"
+                    app:layout_constraintTop_toBottomOf="@+id/editText2"/>
+
+
+            <EditText
+                    android:id="@+id/editText5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ems="11"
+                    android:hint="telefone celular"
+                    android:inputType="phone"
+                    android:textColor="#363636"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="15dp"
+                    android:layout_marginStart="15dp" android:layout_marginEnd="15dp" android:layout_marginRight="15dp"
+                    android:layout_marginTop="-1dp" app:layout_constraintTop_toBottomOf="@+id/editText4"/>
+            <EditText
+                    android:id="@+id/editText3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="E-mail"
+                    android:inputType="textEmailAddress"
+                    android:textColor="#363636"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="15dp"
+                    android:layout_marginStart="15dp" android:layout_marginEnd="15dp" android:layout_marginRight="15dp"
+                    app:layout_constraintTop_toBottomOf="@+id/editText5"/>
+
+
+            <EditText
+                    android:id="@+id/editText6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ems="11"
+                    android:hint="Senha"
+                    android:inputType="textPassword"
+                    android:textColor="#363636"
+                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginLeft="15dp" android:layout_marginStart="15dp" android:layout_marginEnd="15dp"
+                    android:layout_marginRight="15dp"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintTop_toBottomOf="@+id/editText11"/>
+            <EditText
+                    android:id="@+id/editText7"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ems="11"
+                    android:hint="Confirmar senha"
+                    android:inputType="textPassword"
+                    android:textColor="#363636"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="15dp"
+                    android:layout_marginStart="15dp" android:layout_marginEnd="15dp" android:layout_marginRight="15dp"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintTop_toBottomOf="@+id/editText6"/>
+            <Button
+                    android:id="@+id/button2"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@drawable/buttom_customizado_2"
+                    android:text="ENTRAR"
+                    android:textColor="@color/common_google_signin_btn_text_light_default"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginStart="15dp" android:layout_marginEnd="15dp" android:layout_marginRight="15dp"
+                    app:layout_constraintHorizontal_bias="0.0" android:layout_marginTop="5dp"
+                    app:layout_constraintTop_toBottomOf="@+id/editText7"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+            <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:ems="10"
+                    android:id="@+id/editText9"
+                    app:layout_constraintTop_toBottomOf="@+id/editText10" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginLeft="15dp" android:layout_marginStart="15dp"
+                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="15dp"
+                    android:layout_marginEnd="15dp" android:hint="Tipo de veiculo"/>
+            <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:ems="10"
+                    android:id="@+id/editText10"
+                    app:layout_constraintTop_toBottomOf="@+id/editText3" app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="15dp" android:layout_marginRight="15dp"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="15dp"
+                    android:layout_marginStart="15dp" android:hint="Placa do veiculo"/>
+            <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:ems="10"
+                    android:id="@+id/editText11"
+                    app:layout_constraintTop_toBottomOf="@+id/editText9" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginLeft="15dp" android:layout_marginStart="15dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="15dp" android:layout_marginRight="15dp"
+                    android:hint="Tipo de carroceria"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+    <Button
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:id="@+id/button7" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            android:background="@android:drawable/ic_menu_camera"/>
+    <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp" tools:srcCompat="@tools:sample/avatars"
+            android:id="@+id/imageView3"
+            app:layout_constraintEnd_toEndOf="@+id/button7" app:layout_constraintTop_toTopOf="@+id/button7"
+            app:layout_constraintStart_toStartOf="@+id/button7" app:layout_constraintBottom_toBottomOf="@+id/button7"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
