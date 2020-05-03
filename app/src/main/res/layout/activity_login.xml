@@ -113,7 +113,7 @@
             android:layout_marginLeft="25dp"
             android:layout_marginEnd="25dp"
             android:layout_marginRight="25dp"
-            android:text="Clique aqui para redefinir sua senha !"
+            android:text="redefinir senha"
             android:textColor="@color/common_google_signin_btn_text_dark_focused"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"

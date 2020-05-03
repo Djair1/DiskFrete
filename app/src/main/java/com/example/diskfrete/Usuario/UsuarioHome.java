@@ -1,6 +1,7 @@
 package com.example.diskfrete.Usuario;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.view.View;
 import android.widget.*;
 import androidx.annotation.NonNull;
@@ -12,6 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.diskfrete.Motorista.Motorista;
 import com.example.diskfrete.R;
+import com.github.clans.fab.FloatingActionMenu;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;
@@ -32,12 +36,20 @@ public class UsuarioHome extends AppCompatActivity {
     private RecyclerView lista;
     private List<Motorista> listaMotorista = new ArrayList<>();
     int posicao;
+    private FloatingActionMenu BotaoMenu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usuario_home);
         database= FirebaseDatabase.getInstance().getReference("Motoristas");
         barraDeProgresso = new ProgressDialog(this);
+
+        BotaoMenu =findViewById(R.id.floatingActionButton1);
+        BotaoMenu.setClosedOnTouchOutside(true);
+
+
+        //  Snackbar.make(v, "Seu CU" ,Snackbar.LENGTH_LONG).setAction("Action",null).show();
 
 
         lista = findViewById(R.id.ListaMotorista);
@@ -53,11 +65,7 @@ public class UsuarioHome extends AppCompatActivity {
              @Override
              public void onItemClick(@NonNull Item item, @NonNull View view) {
                  carregarDadosDoMotorista(item);
-                // posicao=adapter.getAdapterPosition(item);
-               //  Motorista mt = listaMotorista.get(posicao);
-               //  String nome= mt.getNomeCompleto();
-               //  Toast.makeText(UsuarioHome.this, posicao+" posicao na lista -->"+nome,
-                 //        Toast.LENGTH_SHORT).show();
+
 
              }
          });
@@ -68,7 +76,7 @@ public class UsuarioHome extends AppCompatActivity {
         posicao=adapter.getAdapterPosition(item);
         Motorista mt = listaMotorista.get(posicao);
         String nome= mt.getNomeCompleto();
-        Toast.makeText(UsuarioHome.this, posicao+" posicao na lista -->"+nome,
+        Toast.makeText(UsuarioHome.this, "Adapter ->"+posicao+" posicao na lista ->"+nome,
                 Toast.LENGTH_SHORT).show();
     }
 
@@ -136,7 +144,7 @@ private itemMotorista (Motorista motorista ){
          ImageView fotoMotorista = viewHolder.itemView.findViewById(R.id.imageView2);
 
          texto.setText(motorista.getNomeCompleto());
-            Picasso.get().load(motorista.getFotoPerfil()).into( fotoMotorista);
+            Picasso.get().load(motorista.getFotoPerfil()).resize(500,500).centerCrop().into( fotoMotorista);
 
 
 

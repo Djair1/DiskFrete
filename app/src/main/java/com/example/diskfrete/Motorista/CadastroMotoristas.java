@@ -4,12 +4,12 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import br.com.powerapps.powerimagecompress.PowerImageCompress;
 import com.example.diskfrete.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -31,8 +32,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
-import java.util.UUID;
+import java.io.*;
 
 public class CadastroMotoristas extends AppCompatActivity {
 
@@ -46,6 +48,7 @@ public class CadastroMotoristas extends AppCompatActivity {
     Button capturarDaGaleria,btcadastrar;
     ImageView imagem;
     Uri imagemSelecionada;
+    Bitmap bit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +74,7 @@ public class CadastroMotoristas extends AppCompatActivity {
 
         capturarDaGaleria = (Button) findViewById(R.id.button7);
         imagem = (ImageView) findViewById(R.id.imageView3);
+
 
 
         capturarDaGaleria.setOnClickListener(new View.OnClickListener() {
@@ -168,37 +172,47 @@ public class CadastroMotoristas extends AppCompatActivity {
     }
 
 
+
+    private void carregarImagemPerfil() {
+
+        Intent it = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+       // it.setType("images/*");
+        startActivityForResult(Intent.createChooser(it, "Selecione uma imagem"), 0);
+
+
+
+    }
+
+
+
     @Override
     protected void onActivityResult ( int requestCode, int resultCode, @Nullable Intent data){
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == this.RESULT_OK) {
-            if (requestCode == 1) {
+            if (requestCode == 0) {
                 imagemSelecionada = data.getData();
 
-              //  subirParaFirestore();
+                //  subirParaFirestore();
                 capturarDaGaleria.setBackgroundColor(Color.TRANSPARENT);
 
-                Bitmap bit = null;
+
 
                 try {
-                    bit = MediaStore.Images.Media.getBitmap(getContentResolver(), imagemSelecionada);
-                    imagem.setImageDrawable(new BitmapDrawable(bit));
+                   //  bit = MediaStore.Images.Media.getBitmap(getContentResolver(), imagemSelecionada);
+                    // imagem.setImageDrawable(new BitmapDrawable(bit));
+
+                     Picasso.get()
+                             .load(imagemSelecionada)
+                             .resize(500,500)
+                             .centerCrop()
+                             .into(imagem);
 
                 }catch (Exception e){}
 
 
             }
         }
-    }
-
-    private void carregarImagemPerfil() {
-
-        Intent it = new Intent(Intent.ACTION_PICK,
-                android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-
-        startActivityForResult(Intent.createChooser(it, "Selecione uma imagem"), 1);
-
     }
 
     private void  CadastrarMotorista(){
@@ -236,7 +250,7 @@ public class CadastroMotoristas extends AppCompatActivity {
         SharedPreferences.Editor editor = getSharedPreferences( Motorista_PREFERENCES,MODE_PRIVATE).edit();
         editor.putString("cpf",cpf);
         editor.commit();
-        Intent it = new Intent(CadastroMotoristas.this, MotoristaDiskFrete.class);
+        Intent it = new Intent(CadastroMotoristas.this, MotoristaHome.class);
         it.setFlags(it.FLAG_ACTIVITY_CLEAR_TASK| it.FLAG_ACTIVITY_NEW_TASK);
         startActivity(it);
         Toast.makeText(CadastroMotoristas.this, "Cadastro efetuado com susseso", Toast.LENGTH_SHORT).show();
@@ -248,7 +262,7 @@ public class CadastroMotoristas extends AppCompatActivity {
 
        // String filename = UUID.randomUUID().toString();
         String filename = database.push().getKey();
-        final StorageReference ref = FirebaseStorage.getInstance().getReference("/images/"+filename);
+        final StorageReference ref = FirebaseStorage.getInstance().getReference("/IconMotorista/"+filename);
         ref.putFile(imagemSelecionada).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {

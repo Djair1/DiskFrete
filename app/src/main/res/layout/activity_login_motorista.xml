@@ -120,7 +120,7 @@
             android:layout_height="45dp"
 
             android:background="@drawable/buttom_customizado_2"
-            android:text="Clique aqui para redefinir sua senha !"
+            android:text="redefinir senha"
             android:textColor="@color/common_google_signin_btn_text_dark_focused"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"

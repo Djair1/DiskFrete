@@ -9,9 +9,9 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/NoActionBar">
-        <activity android:name=".Motorista.PerfilFoto">
+        <activity android:name=".Usuario.OpcoesUsuario">
         </activity>
-        <activity android:name=".Motorista.MotoristaDiskFrete">
+        <activity android:name=".Motorista.MotoristaHome">
         </activity>
         <activity android:name=".RedefinirSenha"/>
         <activity android:name=".Usuario.UsuarioHome"/>

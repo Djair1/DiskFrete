@@ -56,7 +56,7 @@ public class LoginMotorista extends AppCompatActivity {
         cpf=prefs.getString("cpf",null);
         if(cpf!=null){
 
-            Intent it = new Intent(LoginMotorista.this, MotoristaDiskFrete.class);
+            Intent it = new Intent(LoginMotorista.this, MotoristaHome.class);
             it.setFlags(it.FLAG_ACTIVITY_CLEAR_TASK| it.FLAG_ACTIVITY_NEW_TASK);
             startActivity(it);
         }
@@ -177,7 +177,7 @@ public class LoginMotorista extends AppCompatActivity {
                 SharedPreferences.Editor editor = getSharedPreferences( Motorista_PREFERENCES,MODE_PRIVATE).edit();
                 editor.putString("cpf",cpf);
                 editor.commit();
-                Intent it = new Intent(LoginMotorista.this, MotoristaDiskFrete.class);
+                Intent it = new Intent(LoginMotorista.this, MotoristaHome.class);
                 it.setFlags(it.FLAG_ACTIVITY_CLEAR_TASK| it.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(it);
 
