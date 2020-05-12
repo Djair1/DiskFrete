@@ -19,13 +19,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import static com.example.diskfrete.Usuario.LoginActivity.Usuario_PREFERENCES;
+
 public class CadastrarUsuarioActivity extends AppCompatActivity {
 
 private FirebaseAuth mAuth;
-private String nomeCompleto ,cidade,email,senha,confiSenha;
+private String nomeCompleto ,telefone,email,senha,confiSenha;
 private DatabaseReference database;
-    public static final  String Usuario_PREFERENCES="login automatico";
-    private ProgressDialog barraDeProgresso;
+private ProgressDialog barraDeProgresso;
 
 
     @Override
@@ -40,7 +41,7 @@ private DatabaseReference database;
 
 
         final EditText ednomeCompleto = (EditText)findViewById(R.id.editText2);
-        final EditText edCidade=(EditText)findViewById(R.id.editText6);
+        final EditText edTelefone=(EditText)findViewById(R.id.editText6);
 
         final EditText edmail = (EditText)findViewById(R.id.editText3) ;
          final EditText edSenha=(EditText)findViewById(R.id.editText);
@@ -57,7 +58,7 @@ private DatabaseReference database;
                 email = edmail.getText().toString().trim();
                 senha = edSenha.getText().toString().trim();
                 nomeCompleto = ednomeCompleto.getText().toString().trim();
-               cidade= edCidade.getText().toString().trim();
+               telefone= edTelefone.getText().toString().trim();
                 confiSenha=edConfSenha.getText().toString().trim();
 
 
@@ -66,8 +67,8 @@ private DatabaseReference database;
                     Toast.makeText(CadastrarUsuarioActivity.this, "por favor inserir nome completo.",
                             Toast.LENGTH_SHORT).show();
                 }
-                else if(cidade.length()==0){
-                    Toast.makeText(CadastrarUsuarioActivity.this, "Campo cidade vazio",
+                else if(telefone.length()==0){
+                    Toast.makeText(CadastrarUsuarioActivity.this, "Campo telefone vazio",
                             Toast.LENGTH_SHORT).show();
                 }
 
@@ -142,7 +143,7 @@ private DatabaseReference database;
 
             private void CadastrarUsuarioNoBanco() {
                 String id = database.push().getKey();
-                Usuario usuario = new Usuario(id,nomeCompleto,cidade,email);
+                Usuario usuario = new Usuario(id,nomeCompleto,telefone,email);
                 database.child(id).setValue(usuario);
 
 

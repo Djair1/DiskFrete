@@ -6,11 +6,11 @@
                                                    android:layout_height="match_parent"
                                                    tools:context=".Motorista.CadastroMotoristas"
                                                    android:id="@+id/linearLayout"
-                                                   android:background="@color/common_google_signin_btn_text_dark_default">
+                                                   android:background="@mipmap/fundo3">
 
     <TextView
             android:id="@+id/textView"
-            android:layout_width="245dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="DISK FRETE"
             android:textColor="#616F7C"
@@ -25,154 +25,161 @@
 
     <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="180dp"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
-            android:id="@+id/relativeLayout4" android:layout_marginTop="5dp"
-            app:layout_constraintBottom_toTopOf="@+id/scrollView2" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            android:layout_height="0dp"
+            android:id="@+id/relativeLayout4" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" android:layout_marginTop="15dp"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginLeft="5dp" android:layout_marginStart="5dp" android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="125dp"
                 android:layout_height="125dp" tools:srcCompat="@tools:sample/avatars"
                 android:id="@+id/imageView3"
-                app:layout_constraintEnd_toEndOf="@+id/button7" app:layout_constraintTop_toTopOf="@+id/button7"
-                app:layout_constraintStart_toStartOf="@+id/button7"
-                app:layout_constraintBottom_toBottomOf="@+id/button7" android:layout_marginRight="106dp"
-                android:layout_marginEnd="106dp" android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginBottom="1dp"
-                android:layout_alignBottom="@+id/button7" android:layout_alignParentStart="true"
-                android:layout_marginLeft="104dp" android:layout_marginStart="104dp"
-                android:layout_alignParentLeft="true"/>
+                android:layout_alignParentEnd="true" android:layout_alignParentRight="true"
+                android:layout_marginRight="120dp" android:layout_marginEnd="120dp"
+                android:layout_alignParentStart="true" android:layout_marginLeft="115dp"
+                android:layout_marginStart="115dp" android:layout_alignParentLeft="true"/>
+
         <Button
                 android:layout_width="125dp"
                 android:layout_height="130dp"
                 android:id="@+id/button7"
-                android:background="@drawable/botao_redondo"
-                android:layout_alignParentBottom="true" android:layout_marginBottom="27dp"
-                android:layout_alignParentEnd="true" android:layout_alignParentRight="true"
-                android:layout_marginRight="118dp" android:layout_marginEnd="118dp"
-                android:layout_alignParentStart="true" android:layout_marginLeft="117dp"
-                android:layout_marginStart="117dp" android:layout_alignParentLeft="true" android:text="Perfil"
+                android:background="@mipmap/icone_camera2"
                 android:textColor="@color/common_google_signin_btn_text_dark_default" android:textSize="18sp"
-                android:textStyle="normal"/>
-    </RelativeLayout>
-    <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginBottom="20dp"
-            app:layout_constraintTop_toBottomOf="@+id/relativeLayout4" android:id="@+id/scrollView2">
+                android:textStyle="normal" android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true" android:layout_marginRight="113dp"
+                android:layout_marginEnd="113dp" android:layout_alignParentStart="true"
+                android:layout_marginLeft="112dp" android:layout_marginStart="112dp"
+                android:layout_alignParentLeft="true"/>
 
-        <LinearLayout
+        <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="250dp"
+                android:id="@+id/scrollView2"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="@+id/button7"
+                android:layout_marginTop="10dp" android:layout_marginLeft="5dp" android:layout_marginStart="5dp"
+                android:layout_marginRight="5dp" android:layout_marginEnd="5dp" android:layout_alignParentBottom="true"
+                android:layout_marginBottom="0dp" android:layout_below="@+id/button7">
 
 
-            <EditText
-                    android:id="@+id/editText2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="Nome Completo"
-                    android:inputType="text"
-                    android:textColor="#363636"
-            />
-            <EditText
-                    android:id="@+id/editText4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="CPF"
-                    android:inputType="number"
-                    android:textColor="#363636"
-            />
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:orientation="vertical" android:id="@+id/leyout1"
+                          android:layout_alignParentBottom="true"
+                          android:layout_marginTop="10dp" android:layout_below="@+id/imageView3">
+
+                <EditText
+                        android:id="@+id/editText2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="Nome Completo"
+                        android:inputType="text"
+                        android:textColor="@color/common_google_signin_btn_text_dark_default"
+                />
+                <EditText
+                        android:id="@+id/editText4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="CPF"
+                        android:inputType="number"
+                        android:textColor="@color/common_google_signin_btn_text_dark_default"
+                />
 
 
-            <EditText
-                    android:id="@+id/editText5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="11"
-                    android:hint="telefone celular"
-                    android:inputType="phone"
-                    android:textColor="#363636"
-            />
+                <EditText
+                        android:id="@+id/editText5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="11"
+                        android:hint="telefone celular"
+                        android:inputType="phone"
+                        android:textColor="@color/common_google_signin_btn_text_dark_default"
+                />
 
-            <EditText
-                    android:id="@+id/editText3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="E-mail"
-                    android:inputType="textEmailAddress"
-                    android:textColor="#363636"
-            />
-
-
-            <EditText
-                    android:id="@+id/editText6"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="11"
-                    android:hint="Senha"
-                    android:inputType="textPassword"
-                    android:textColor="#363636"
-            />
-
-            <EditText
-                    android:id="@+id/editText7"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="11"
-                    android:hint="Confirmar senha"
-                    android:inputType="textPassword"
-                    android:textColor="#363636"
-            />
+                <EditText
+                        android:id="@+id/editText3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="E-mail"
+                        android:inputType="textEmailAddress"
+                        android:textColor="@color/common_google_signin_btn_text_dark_default"
+                />
 
 
-            <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:ems="10"
-                    android:id="@+id/editText9"
-                    android:hint="Tipo de veiculo"/>
+                <EditText
+                        android:id="@+id/editText6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="11"
+                        android:hint="Senha"
+                        android:inputType="textPassword"
+                        android:textColor="@color/common_google_signin_btn_text_dark_default"
+                />
+
+                <EditText
+                        android:id="@+id/editText7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="11"
+                        android:hint="Confirmar senha"
+                        android:inputType="textPassword"
+                        android:textColor="@color/common_google_signin_btn_text_dark_default"
+                />
 
 
-            <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:ems="10"
-                    android:id="@+id/editText10"
-                    android:hint="Placa do veiculo"/>
+                <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:ems="10"
+                        android:id="@+id/editText9"
+                        android:hint="Tipo de veiculo"
+                        android:textColor="@color/common_google_signin_btn_text_dark_default"/>
 
 
-            <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:ems="10"
-                    android:id="@+id/editText11"
-                    android:hint="Tipo de carroceria"/>
+                <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:ems="10"
+                        android:id="@+id/editText10"
+                        android:hint="Placa do veiculo"
+                        android:textColor="@color/common_google_signin_btn_text_dark_default"/>
 
 
-            <Button
-                    android:id="@+id/button2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/buttom_customizado_2"
-                    android:text="ENTRAR"
-                    android:textColor="@color/common_google_signin_btn_text_light_default"
-                    android:textSize="18sp"
-            />
+                <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:ems="10"
+                        android:id="@+id/editText11"
+                        android:hint="Tipo de carroceria"
+                        android:textColor="@color/common_google_signin_btn_text_dark_default"/>
 
-        </LinearLayout>
 
-    </ScrollView>
+                <Button
+                        android:id="@+id/button2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginBottom="30dp"
+                        android:background="@drawable/buttom_customizado_2"
+                        android:text="ENTRAR"
+                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                        android:textSize="18sp"
+                />
+            </LinearLayout>
+        </ScrollView>
+
+    </RelativeLayout>
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

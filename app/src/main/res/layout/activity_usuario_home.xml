@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".Usuario.UsuarioHome">
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                tools:context=".Usuario.UsuarioHome"
+                android:background="@color/common_google_signin_btn_text_dark_default">
 
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
@@ -16,6 +17,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:menu_fab_label="Menu"
+            app:menu_colorNormal="#2196F3"
+            app:menu_colorPressed="#9C27B0"
+            app:menu_colorRipple="#4CAF50"
+            app:menu_labels_colorNormal="#2196F3"
+            app:menu_labels_colorPressed="#4CAF50"
+            app:menu_labels_colorRipple="#FF9800"
             android:clickable="true" app:srcCompat="@android:drawable/ic_menu_manage"
             android:id="@+id/floatingActionButton1" android:layout_alignParentBottom="true"
             android:layout_marginBottom="20dp" android:layout_alignParentEnd="true"
@@ -25,9 +32,13 @@
         <com.github.clans.fab.FloatingActionButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="cadastrarFrete"
                 app:fab_label="Cadastrar Frete"
+                app:fab_colorNormal="#FFC107"
+                app:fab_colorPressed="#E91E63"
+                app:fab_colorRipple="#FFC107"
                 android:clickable="true"
-                android:src="@mipmap/adicionar_frete"
+                android:src="@mipmap/cadastro_usuario"
                 app:srcCompat="@android:drawable/ic_menu_manage"
                 android:id="@+id/floatingActionButton2"
 
@@ -35,7 +46,11 @@
         <com.github.clans.fab.FloatingActionButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:fab_label="Atualizar Perfil"
+                android:onClick="testarShared"
+                app:fab_label="Fretes Cadastrados"
+                app:fab_colorNormal="#4CAF50"
+                app:fab_colorPressed="#E91E63"
+                app:fab_colorRipple="#FFC107"
                 android:clickable="true"
                 android:src="@mipmap/editar_usuario"
                 app:srcCompat="@android:drawable/ic_menu_manage"
@@ -47,14 +62,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:fab_label="Logout"
+                app:fab_colorNormal="#FF5722"
+                app:fab_colorPressed="#00BCD4"
+                app:fab_colorRipple="#FFC107"
                 android:clickable="true"
-                android:src="@mipmap/logout"
+                android:src="@mipmap/logout_usuario"
                 android:id="@+id/floatingActionButton4"
 
         />
 
     </com.github.clans.fab.FloatingActionMenu>
-
 
 
 </RelativeLayout>

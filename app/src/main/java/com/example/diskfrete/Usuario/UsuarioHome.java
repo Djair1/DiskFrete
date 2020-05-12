@@ -2,6 +2,7 @@ package com.example.diskfrete.Usuario;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.View;
 import android.widget.*;
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.diskfrete.Motorista.Motorista;
 import com.example.diskfrete.R;
+import com.example.diskfrete.TeladeEspera;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -27,6 +29,9 @@ import com.xwray.groupie.ViewHolder;
 
 import java.util.*;
 
+
+import static com.example.diskfrete.Usuario.CadastrarFrete.Usuario_Solicitacao_concluida;
+
 public class UsuarioHome extends AppCompatActivity {
 
 
@@ -38,33 +43,42 @@ public class UsuarioHome extends AppCompatActivity {
     int posicao;
     private FloatingActionMenu BotaoMenu;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usuario_home);
+
+
+
+
         database= FirebaseDatabase.getInstance().getReference("Motoristas");
         barraDeProgresso = new ProgressDialog(this);
 
         BotaoMenu =findViewById(R.id.floatingActionButton1);
         BotaoMenu.setClosedOnTouchOutside(true);
-
-
-        //  Snackbar.make(v, "Seu CU" ,Snackbar.LENGTH_LONG).setAction("Action",null).show();
-
-
         lista = findViewById(R.id.ListaMotorista);
+        adapter = new GroupAdapter();
+        lista.setAdapter(adapter);
+        lista.setLayoutManager(new LinearLayoutManager(this));
 
-       adapter = new GroupAdapter();
-       lista.setAdapter(adapter);
-       lista.setLayoutManager(new LinearLayoutManager(this));
 
 
-         carregarMotoristas();
+        carregarMotoristas();
+
+
+
+
+
+        //  Snackbar.make(v, "Seu " ,Snackbar.LENGTH_LONG).setAction("Action",null).show();
+
+
+
 
          adapter.setOnItemClickListener(new OnItemClickListener() {
              @Override
              public void onItemClick(@NonNull Item item, @NonNull View view) {
-                 carregarDadosDoMotorista(item);
+                 chamaMotorista(item);
 
 
              }
@@ -72,12 +86,39 @@ public class UsuarioHome extends AppCompatActivity {
 
 }
 
-    private void carregarDadosDoMotorista(Item item) {
+  //  @Override
+  //  public void onBackPressed() {
+   //     super.finish();
+   // }
+
+
+
+
+public void cadastrarFrete(View view){
+
+
+}
+public void testarShared(View view){
+
+}
+
+
+
+
+    private void chamaMotorista(Item item) {
         posicao=adapter.getAdapterPosition(item);
         Motorista mt = listaMotorista.get(posicao);
-        String nome= mt.getNomeCompleto();
-        Toast.makeText(UsuarioHome.this, "Adapter ->"+posicao+" posicao na lista ->"+nome,
-                Toast.LENGTH_SHORT).show();
+        Intent it = new Intent(UsuarioHome.this,CadastrarFrete.class) ;
+        it.putExtra("MOTORISTAEMAIL",mt.getEmail());
+        it.putExtra("NOME",mt.getNomeCompleto());
+        it.putExtra("CARRO",mt.getTipoDeVeiculo());
+        it.putExtra("PLACA",mt.getPlacaDoVeiculo());
+        it.putExtra("TELEFONE",mt.getTelefone());
+        it.putExtra("FOTOPERFIL",mt.getFotoPerfil());
+        startActivity(it);
+       // String nome= mt.getNomeCompleto();
+       // Toast.makeText(UsuarioHome.this, "Adapter ->"+posicao+" posicao na lista ->"+nome,
+        //        Toast.LENGTH_SHORT).show();
     }
 
     private void buscarCurrentUser() {
@@ -97,15 +138,16 @@ public class UsuarioHome extends AppCompatActivity {
         }
     }
 
-    private void progressobarra() {
+
+
+
+
+
+    private void carregarMotoristas() {
         barraDeProgresso.setTitle("Bem Vindo");
         barraDeProgresso.setMessage("carregando...");
         barraDeProgresso.setCanceledOnTouchOutside(false);
         barraDeProgresso.show();
-    }
-
-    private void carregarMotoristas() {
-        progressobarra();
         database.addValueEventListener(new ValueEventListener() {
 
             @Override
@@ -155,6 +197,5 @@ private itemMotorista (Motorista motorista ){
             return  R.layout.item_motorista;
         }
     }
-
 
 }

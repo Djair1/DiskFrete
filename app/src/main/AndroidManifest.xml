@@ -8,18 +8,24 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/NoActionBar">
+            android:theme="@style/AppTheme">
+        <activity android:name=".TeladeEspera">
+        </activity>
+        <activity android:name=".Usuario.CadastrarFrete">
+        </activity>
         <activity android:name=".Usuario.OpcoesUsuario">
         </activity>
         <activity android:name=".Motorista.MotoristaHome">
         </activity>
         <activity android:name=".RedefinirSenha"/>
-        <activity android:name=".Usuario.UsuarioHome"/>
+        <activity
+                android:name=".Usuario.UsuarioHome"
+                android:screenOrientation="portrait"/>
         <activity android:name=".Motorista.LoginMotorista"/>
         <activity android:name=".Motorista.CadastroMotoristas"/>
         <activity android:name=".Usuario.CadastrarUsuarioActivity"/>
-        <activity android:name=".Usuario.LoginActivity"/>
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".Usuario.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

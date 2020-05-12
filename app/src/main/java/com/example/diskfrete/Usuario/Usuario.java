@@ -4,17 +4,17 @@ package com.example.diskfrete.Usuario;
 
 public class Usuario {
 
-  private String id,nomeCompleto,cidade,email;
+  private String id,nomeCompleto,telefone,email;
 
 
   public Usuario() {
 
   }
 
-  public Usuario(String id, String nomeCompleto,String cidade, String email) {
+  public Usuario(String id, String nomeCompleto,String telefone, String email) {
     this.id= id;
     this.nomeCompleto = nomeCompleto;
-    this.cidade=cidade;
+    this.telefone=telefone;
     this.email = email;
 
   }
@@ -25,8 +25,8 @@ public class Usuario {
   public String getNomeCompleto() { return nomeCompleto;
   }
 
-  public String getCidade() {
-    return cidade;
+  public String getTelefone() {
+    return telefone;
   }
 
   public String getEmail() {
