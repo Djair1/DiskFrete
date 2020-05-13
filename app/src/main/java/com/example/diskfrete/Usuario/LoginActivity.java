@@ -2,7 +2,7 @@ package com.example.diskfrete.Usuario;
 
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
-import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 
 import com.example.diskfrete.R;
 import com.example.diskfrete.RedefinirSenha;
@@ -29,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText Email, Senha;
     private String email,senha;
     private String emailM,nomeM;
-    FirebaseAuth firebaseAuth;
+    private FirebaseAuth firebaseAuth;
     public static final  String Usuario_PREFERENCES="login automatico";
     private ProgressDialog barraDeProgresso;
 
@@ -38,10 +39,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         firebaseAuth = FirebaseAuth.getInstance();
-
-
-
-
 
 
 
@@ -142,6 +139,8 @@ public class LoginActivity extends AppCompatActivity {
             }
 
         });
+
+
 
  }
 

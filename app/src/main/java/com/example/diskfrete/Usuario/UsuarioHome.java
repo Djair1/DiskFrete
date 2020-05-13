@@ -111,10 +111,11 @@ public void testarShared(View view){
         Intent it = new Intent(UsuarioHome.this,CadastrarFrete.class) ;
         it.putExtra("MOTORISTAEMAIL",mt.getEmail());
         it.putExtra("NOME",mt.getNomeCompleto());
-        it.putExtra("CARRO",mt.getTipoDeVeiculo());
         it.putExtra("PLACA",mt.getPlacaDoVeiculo());
         it.putExtra("TELEFONE",mt.getTelefone());
+        it.putExtra("CARROCERIA",mt.getTipoDeCarroceria());
         it.putExtra("FOTOPERFIL",mt.getFotoPerfil());
+        it.putExtra("VEICULO",mt.getTipoDeVeiculo());
         startActivity(it);
        // String nome= mt.getNomeCompleto();
        // Toast.makeText(UsuarioHome.this, "Adapter ->"+posicao+" posicao na lista ->"+nome,
@@ -182,10 +183,14 @@ private itemMotorista (Motorista motorista ){
 
         @Override
         public void bind(@NonNull ViewHolder viewHolder, int i) {
-           TextView texto= viewHolder.itemView.findViewById(R.id.textView4);
+           TextView texto1= viewHolder.itemView.findViewById(R.id.textView4);
+           TextView texto2= viewHolder.itemView.findViewById(R.id.textView16);
+           TextView texto3= viewHolder.itemView.findViewById(R.id.textView17);
          ImageView fotoMotorista = viewHolder.itemView.findViewById(R.id.imageView2);
 
-         texto.setText(motorista.getNomeCompleto());
+         texto2.setText(motorista.getTipoDeVeiculo());
+         texto1.setText(motorista.getNomeCompleto());
+         texto3.setText(motorista.getTipoDeCarroceria());
             Picasso.get().load(motorista.getFotoPerfil()).resize(500,500).centerCrop().into( fotoMotorista);
 
 
