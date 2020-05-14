@@ -1,4 +1,4 @@
-package com.example.diskfrete.Usuario;
+package com.example.diskfrete;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.diskfrete.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -19,7 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import static com.example.diskfrete.Usuario.LoginActivity.Usuario_PREFERENCES;
+import static com.example.diskfrete.LoginActivity.Usuario_PREFERENCES;
 
 public class CadastrarUsuarioActivity extends AppCompatActivity {
 

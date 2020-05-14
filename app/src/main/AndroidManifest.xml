@@ -13,21 +13,21 @@
         </activity>
         <activity android:name=".TeladeEspera">
         </activity>
-        <activity android:name=".Usuario.CadastrarFrete">
+        <activity android:name=".CadastrarFrete">
         </activity>
-        <activity android:name=".Usuario.OpcoesUsuario">
+        <activity android:name=".OpcoesUsuario">
         </activity>
-        <activity android:name=".Motorista.MotoristaHome">
+        <activity android:name=".MotoristaHome">
         </activity>
         <activity android:name=".RedefinirSenha"/>
         <activity
-                android:name=".Usuario.UsuarioHome"
+                android:name=".UsuarioHome"
                 android:screenOrientation="portrait"/>
-        <activity android:name=".Motorista.LoginMotorista"/>
-        <activity android:name=".Motorista.CadastroMotoristas"/>
-        <activity android:name=".Usuario.CadastrarUsuarioActivity"/>
+        <activity android:name=".LoginMotorista"/>
+        <activity android:name=".CadastroMotoristas"/>
+        <activity android:name=".CadastrarUsuarioActivity"/>
         <activity android:name=".MainActivity"/>
-        <activity android:name=".Usuario.LoginActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

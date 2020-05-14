@@ -1,8 +1,7 @@
-package com.example.diskfrete.Usuario;
+package com.example.diskfrete;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.view.View;
 import android.widget.*;
 import androidx.annotation.NonNull;
@@ -12,12 +11,7 @@ import android.os.Bundle;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.diskfrete.Motorista.Motorista;
-import com.example.diskfrete.R;
-import com.example.diskfrete.TeladeEspera;
 import com.github.clans.fab.FloatingActionMenu;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;
@@ -28,9 +22,6 @@ import com.xwray.groupie.OnItemClickListener;
 import com.xwray.groupie.ViewHolder;
 
 import java.util.*;
-
-
-import static com.example.diskfrete.Usuario.CadastrarFrete.Usuario_Solicitacao_concluida;
 
 public class UsuarioHome extends AppCompatActivity {
 
