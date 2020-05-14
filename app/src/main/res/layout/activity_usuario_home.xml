@@ -61,6 +61,7 @@
         <com.github.clans.fab.FloatingActionButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="logoutUsuario"
                 app:fab_label="Logout"
                 app:fab_colorNormal="#FF5722"
                 app:fab_colorPressed="#00BCD4"

@@ -2,6 +2,7 @@ package com.example.diskfrete;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.View;
 import android.widget.*;
 import androidx.annotation.NonNull;
@@ -22,6 +23,8 @@ import com.xwray.groupie.OnItemClickListener;
 import com.xwray.groupie.ViewHolder;
 
 import java.util.*;
+
+import static com.example.diskfrete.LoginActivity.Usuario_PREFERENCES;
 
 public class UsuarioHome extends AppCompatActivity {
 
@@ -82,7 +85,14 @@ public class UsuarioHome extends AppCompatActivity {
    //     super.finish();
    // }
 
-
+public void logoutUsuario(View view){
+    SharedPreferences.Editor editor = getSharedPreferences(Usuario_PREFERENCES,MODE_PRIVATE).edit();
+    editor.putString("EMAIL",null);
+    editor.putString("ATOR",null);
+    editor.commit();
+    FirebaseAuth.getInstance().signOut();
+    finish();
+}
 
 
 public void cadastrarFrete(View view){
@@ -130,22 +140,33 @@ public void testarShared(View view){
         }
     }
 
+public void barradProgresso(boolean resposta,String title){
+        if(resposta==true){
 
+            barraDeProgresso.setTitle(title);
+            barraDeProgresso.setMessage("carregando...");
+            barraDeProgresso.setCanceledOnTouchOutside(false);
+            barraDeProgresso.show();
+
+        }else if(resposta==false){barraDeProgresso.dismiss();}
+
+}
 
 
 
 
     private void carregarMotoristas() {
-        barraDeProgresso.setTitle("Bem Vindo");
-        barraDeProgresso.setMessage("carregando...");
-        barraDeProgresso.setCanceledOnTouchOutside(false);
-        barraDeProgresso.show();
+
+        barradProgresso(true,"BEM VINDO...");
         database.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                 listaMotorista.clear();
+                adapter.clear();
                 for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
+
 
                     Motorista motorista = objSnapshot.getValue(Motorista.class);
                     listaMotorista.add(motorista);
@@ -153,8 +174,8 @@ public void testarShared(View view){
 
  }
 
-                barraDeProgresso.dismiss();
 
+                barradProgresso(false,"");
             }
 
             @Override
