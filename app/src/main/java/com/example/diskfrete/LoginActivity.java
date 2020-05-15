@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent it = new Intent(LoginActivity.this, CadastrarUsuarioActivity.class);
+                Intent it = new Intent(LoginActivity.this, DialogoCadastro.class);
                 startActivity(it);
 
             }

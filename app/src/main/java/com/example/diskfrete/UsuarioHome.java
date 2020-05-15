@@ -95,11 +95,8 @@ public void logoutUsuario(View view){
 }
 
 
-public void cadastrarFrete(View view){
 
-
-}
-public void testarShared(View view){
+public void historicoDfretes(View view){
 
 }
 
@@ -114,7 +111,7 @@ public void testarShared(View view){
         it.putExtra("NOME",mt.getNomeCompleto());
         it.putExtra("PLACA",mt.getPlacaDoVeiculo());
         it.putExtra("TELEFONE",mt.getTelefone());
-        it.putExtra("CARROCERIA",mt.getTipoDeCarroceria());
+        it.putExtra("VOLUME",mt.getVolumeMaximo());
         it.putExtra("FOTOPERFIL",mt.getFotoPerfil());
         it.putExtra("VEICULO",mt.getTipoDeVeiculo());
         startActivity(it);
@@ -202,7 +199,7 @@ private itemMotorista (Motorista motorista ){
 
          texto2.setText(motorista.getTipoDeVeiculo());
          texto1.setText(motorista.getNomeCompleto());
-         texto3.setText(motorista.getTipoDeCarroceria());
+         texto3.setText(motorista.getVolumeMaximo());
             Picasso.get().load(motorista.getFotoPerfil()).resize(500,500).centerCrop().into( fotoMotorista);
 
 

@@ -9,13 +9,13 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".CadastroMotoristas1">
+        </activity>
         <activity android:name=".DialogoCadastro">
         </activity>
         <activity android:name=".TeladeEspera">
         </activity>
         <activity android:name=".CadastrarFrete">
-        </activity>
-        <activity android:name=".OpcoesUsuario">
         </activity>
         <activity android:name=".MotoristaHome">
         </activity>
@@ -23,10 +23,8 @@
         <activity
                 android:name=".UsuarioHome"
                 android:screenOrientation="portrait"/>
-        <activity android:name=".LoginMotorista"/>
         <activity android:name=".CadastroMotoristas"/>
         <activity android:name=".CadastrarUsuarioActivity"/>
-        <activity android:name=".MainActivity"/>
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
