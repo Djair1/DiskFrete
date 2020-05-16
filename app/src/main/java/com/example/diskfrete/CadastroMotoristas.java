@@ -30,16 +30,23 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import static com.example.diskfrete.LoginActivity.Motorista_PREFERENCES;
+
 public class CadastroMotoristas extends AppCompatActivity {
 
 
-    private String nomeCompleto,cpf,telefone,email,placaDoVeiculo,tipoDeVeiculo,VolumeMaximo,senha,confiSenha;
+    private FirebaseAuth mAuth;
+    private String nomeCompleto, cpf, telefone, email, placaDoVeiculo, tipoDeVeiculo, VolumeMaximo, senha, confiSenha, fotoPerfil, fotoCNH=" ", fotoCRLV=" ";
+    private DatabaseReference database;
+    private ProgressDialog barraDeProgresso;
     private ValidarCpf validarCpf;
     EditText ednomeCompleto,edCpf, edTelefone,edmail,edPlaca,edSenha,edveiculo,edpesoVolumeMaximo,edConfSenha;
     Button capturarDaGaleria,btcadastrar;
     ImageView imagem;
-    Uri imagemSelecionada;
+    Uri perfilImagem;
+    StorageReference refPerfil;
     Bitmap bit;
+    String filename;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +54,11 @@ public class CadastroMotoristas extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro_motoristas);
 
 
-
-
+        mAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance().getReference("Motoristas");
+        filename = database.push().getKey();
+        refPerfil = FirebaseStorage.getInstance().getReference("/MotoristasPerfil/" + filename);
+        barraDeProgresso = new ProgressDialog(this);
 
 
          ednomeCompleto = (EditText)findViewById(R.id.editText2);
@@ -109,11 +119,11 @@ public class CadastroMotoristas extends AppCompatActivity {
 
 
 
-        if(nomeCompleto.length()<=3){
+        if(nomeCompleto.length()<=8){
             Toast.makeText(CadastroMotoristas.this, "por favor inserir nome completo.",
                     Toast.LENGTH_SHORT).show();
 
-        }else if (imagemSelecionada == null ) {
+        }else if (perfilImagem == null ) {
 
             Toast.makeText(CadastroMotoristas.this, "Definir foto de Perfil",
                     Toast.LENGTH_SHORT).show();
@@ -153,19 +163,7 @@ public class CadastroMotoristas extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
 
         }else if(Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            String url= imagemSelecionada.toString();
-            Intent it = new Intent(CadastroMotoristas.this,CadastroMotoristas1.class);
-            it.putExtra("NOME",nomeCompleto);
-            it.putExtra("IMAGEM",url);
-            it.putExtra("CPF",cpf);
-            it.putExtra("TELEFONE",telefone);
-            it.putExtra("PLACA",placaDoVeiculo);
-            it.putExtra("VEICULO",tipoDeVeiculo);
-            it.putExtra("VOLUME",VolumeMaximo);
-            it.putExtra("EMAIL",email);
-            it.putExtra("SENHA",senha);
-            startActivity(it);
-            finish();
+            CadastrarMotorista();
 
         }else{Toast.makeText(CadastroMotoristas.this, "email inválido ! ",
                 Toast.LENGTH_SHORT).show();}
@@ -193,7 +191,7 @@ public class CadastroMotoristas extends AppCompatActivity {
 
         if (resultCode == this.RESULT_OK) {
             if (requestCode == 0) {
-                imagemSelecionada = data.getData();
+                perfilImagem = data.getData();
 
                 //  subirParaFirestore();
                 capturarDaGaleria.setBackgroundColor(Color.TRANSPARENT);
@@ -205,7 +203,7 @@ public class CadastroMotoristas extends AppCompatActivity {
                     // imagem.setImageDrawable(new BitmapDrawable(bit));
 
                      Picasso.get()
-                             .load(imagemSelecionada)
+                             .load(perfilImagem)
                              .resize(500,500)
                              .centerCrop()
                              .into(imagem);
@@ -217,4 +215,78 @@ public class CadastroMotoristas extends AppCompatActivity {
         }
     }
 
+    private void CadastrarMotorista() {
+        barraDeProgresso.setTitle("CONECTANDO");
+        barraDeProgresso.setMessage("aguarde...");
+        barraDeProgresso.setCanceledOnTouchOutside(false);
+        barraDeProgresso.show();
+        mAuth.createUserWithEmailAndPassword(email, senha)
+                .addOnCompleteListener(CadastroMotoristas.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+
+                        if (task.isSuccessful()) {
+                            subirPerfilMotoristaFirestore();
+
+                        } else {
+                            barraDeProgresso.dismiss();
+                            Toast.makeText(CadastroMotoristas.this, "Erro ao iniciar cadastro!",
+                                    Toast.LENGTH_SHORT).show();
+
+                        }
+
+
+                    }
+                });
+
+
+    }
+
+
+
+
+    private void subirPerfilMotoristaFirestore() {
+
+        // String filename = UUID.randomUUID().toString();
+        refPerfil.putFile(perfilImagem).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                refPerfil.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+
+                        fotoPerfil = uri.toString();
+                        CadastrarMotoristaNoBanco();
+                    }
+
+                });
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(CadastroMotoristas.this, " Erro ao processar Imagem do perfil",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    private void CadastrarMotoristaNoBanco() {
+        String id = database.push().getKey();
+        Motorista motorista = new Motorista(id,nomeCompleto,cpf,telefone,email,placaDoVeiculo,tipoDeVeiculo,VolumeMaximo,fotoPerfil,fotoCNH,fotoCRLV);
+        database.child(id).setValue(motorista);
+
+
+        motoristaNext(id);
+    }
+
+    private void motoristaNext(String uid) {
+
+        Intent it = new Intent(CadastroMotoristas.this, CadastroMotoristas1.class);
+        it.setFlags(it.FLAG_ACTIVITY_CLEAR_TASK | it.FLAG_ACTIVITY_NEW_TASK);
+        it.putExtra("ID",uid);
+        startActivity(it);
+
+    }
 }
