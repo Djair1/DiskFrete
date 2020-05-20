@@ -5,7 +5,8 @@
                                                    android:id="@+id/relativeLayout"
                                                    android:layout_width="match_parent"
                                                    android:layout_height="match_parent"
-                                                   tools:context=".LoginActivity">
+                                                   tools:context=".LoginActivity"
+>
 
 
     <TextView
@@ -73,14 +74,14 @@
             android:layout_marginLeft="25dp"
             android:layout_marginEnd="25dp"
             android:layout_marginRight="25dp"
-            android:background="@drawable/buttom_customizado_2"
             android:text="ENTRAR"
             android:textColor="@android:color/background_dark"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            android:layout_marginBottom="10dp" app:layout_constraintBottom_toTopOf="@+id/button4"/>
+            android:layout_marginBottom="10dp" app:layout_constraintBottom_toTopOf="@+id/button4"
+            android:background="@drawable/buttom_customizado_2"/>
     <Button
             android:id="@+id/button4"
             android:layout_width="0dp"
@@ -94,9 +95,9 @@
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:background="@drawable/buttom_customizado_2"
             app:layout_constraintHorizontal_bias="0.0"
-            android:layout_marginBottom="30dp" app:layout_constraintBottom_toTopOf="@+id/textView11"/>
+            android:layout_marginBottom="30dp" app:layout_constraintBottom_toTopOf="@+id/textView11"
+            android:background="@drawable/buttom_customizado_1"/>
     <TextView
             android:text="Esqueceu sua senha Clique"
             android:layout_width="180dp"

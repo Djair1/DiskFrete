@@ -1,4 +1,4 @@
-package com.example.diskfrete;
+package com.example.diskfrete.USUARIO;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -12,6 +12,9 @@ import android.os.Bundle;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.example.diskfrete.LoginActivity;
+import com.example.diskfrete.MOTORISTA.Motorista;
+import com.example.diskfrete.R;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -91,6 +94,8 @@ public void logoutUsuario(View view){
     editor.putString("ATOR",null);
     editor.commit();
     FirebaseAuth.getInstance().signOut();
+    Intent it = new Intent(UsuarioHome.this, LoginActivity.class);
+    startActivity(it);
     finish();
 }
 
@@ -106,7 +111,7 @@ public void historicoDfretes(View view){
     private void chamaMotorista(Item item) {
         posicao=adapter.getAdapterPosition(item);
         Motorista mt = listaMotorista.get(posicao);
-        Intent it = new Intent(UsuarioHome.this,CadastrarFrete.class) ;
+        Intent it = new Intent(UsuarioHome.this, CadastrarFrete.class) ;
         it.putExtra("MOTORISTAEMAIL",mt.getEmail());
         it.putExtra("NOME",mt.getNomeCompleto());
         it.putExtra("PLACA",mt.getPlacaDoVeiculo());

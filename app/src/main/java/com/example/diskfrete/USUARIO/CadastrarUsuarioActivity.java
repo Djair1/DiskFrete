@@ -1,4 +1,4 @@
-package com.example.diskfrete;
+package com.example.diskfrete.USUARIO;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import com.example.diskfrete.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -32,6 +33,7 @@ private ProgressDialog barraDeProgresso;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastrar_usuario);
+        setTitle("Cadastro Usuario");
 
         mAuth = FirebaseAuth.getInstance();
         database= FirebaseDatabase.getInstance().getReference("Usuarios");

@@ -1,8 +1,7 @@
-package com.example.diskfrete;
+package com.example.diskfrete.MOTORISTA;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
@@ -17,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import com.example.diskfrete.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -29,8 +29,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
-
-import static com.example.diskfrete.LoginActivity.Motorista_PREFERENCES;
 
 public class CadastroMotoristas extends AppCompatActivity {
 
@@ -52,7 +50,7 @@ public class CadastroMotoristas extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_motoristas);
-
+        setTitle("Cadastro Motorista");
 
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance().getReference("Motoristas");
@@ -287,6 +285,7 @@ public class CadastroMotoristas extends AppCompatActivity {
         it.setFlags(it.FLAG_ACTIVITY_CLEAR_TASK | it.FLAG_ACTIVITY_NEW_TASK);
         it.putExtra("ID",uid);
         startActivity(it);
+        finish();
 
     }
 }
