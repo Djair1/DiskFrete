@@ -192,7 +192,7 @@ public class CadastroMotoristas extends AppCompatActivity {
                 perfilImagem = data.getData();
 
                 //  subirParaFirestore();
-                capturarDaGaleria.setBackgroundColor(Color.TRANSPARENT);
+              //  capturarDaGaleria.setBackgroundColor(Color.TRANSPARENT);
 
 
 
