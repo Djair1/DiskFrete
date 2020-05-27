@@ -16,6 +16,7 @@ import com.example.diskfrete.LoginActivity;
 import com.example.diskfrete.MOTORISTA.Motorista;
 import com.example.diskfrete.R;
 import com.github.clans.fab.FloatingActionMenu;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;
@@ -28,6 +29,7 @@ import com.xwray.groupie.ViewHolder;
 import java.util.*;
 
 import static com.example.diskfrete.LoginActivity.Usuario_PREFERENCES;
+import static com.example.diskfrete.USUARIO.CadastrarFrete.Usuario_Solicitacao_concluida;
 
 public class UsuarioHome extends AppCompatActivity {
 
@@ -39,7 +41,7 @@ public class UsuarioHome extends AppCompatActivity {
     private List<Motorista> listaMotorista = new ArrayList<>();
     int posicao;
     private FloatingActionMenu BotaoMenu;
-
+    private String frete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,12 +64,12 @@ public class UsuarioHome extends AppCompatActivity {
 
 
         carregarMotoristas();
+        freteCancelado();
 
 
 
 
 
-        //  Snackbar.make(v, "Seu " ,Snackbar.LENGTH_LONG).setAction("Action",null).show();
 
 
 
@@ -92,7 +94,7 @@ public void logoutUsuario(View view){
     SharedPreferences.Editor editor = getSharedPreferences(Usuario_PREFERENCES,MODE_PRIVATE).edit();
     editor.putString("EMAIL",null);
     editor.putString("ATOR",null);
-    editor.commit();
+    editor.apply();
     FirebaseAuth.getInstance().signOut();
     Intent it = new Intent(UsuarioHome.this, LoginActivity.class);
     startActivity(it);
@@ -216,5 +218,21 @@ private itemMotorista (Motorista motorista ){
             return  R.layout.item_motorista;
         }
     }
+public void freteCancelado(){
 
+    SharedPreferences pref=getSharedPreferences( Usuario_Solicitacao_concluida,MODE_PRIVATE);
+    frete =pref.getString("STFRETE",null);
+
+    if(frete != null){
+
+        Snackbar.make(null, "Motorista indisponivel no momento" ,Snackbar.LENGTH_LONG).setAction("Action",null).show();
+
+        SharedPreferences.Editor editor = getSharedPreferences(Usuario_Solicitacao_concluida,MODE_PRIVATE).edit();
+        editor.putString("EMAIL",null);
+        editor.putString("STFRETE",null);
+        editor.commit();
+
+    }
+
+}
 }

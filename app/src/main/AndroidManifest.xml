@@ -9,25 +9,25 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".MOTORISTA.CadastrarMotorista2">
+        <activity android:name=".MOTORISTA.FreteMotorista"  android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".MOTORISTA.CadastroMotoristas1">
+        <activity android:name=".MOTORISTA.CadastrarMotorista2"  android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".DialogoCadastro">
+        <activity android:name=".MOTORISTA.CadastroMotoristas1"   android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".USUARIO.TeladeEspera">
+        <activity android:name=".DialogoCadastro"  android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".USUARIO.CadastrarFrete">
+        <activity android:name=".USUARIO.TeladeEspera"  android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".MOTORISTA.MotoristaHome">
+        <activity android:name=".USUARIO.CadastrarFrete"  android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".RedefinirSenha"/>
-        <activity
-                android:name=".USUARIO.UsuarioHome"
-                android:screenOrientation="portrait"/>
-        <activity android:name=".MOTORISTA.CadastroMotoristas"/>
-        <activity android:name=".USUARIO.CadastrarUsuarioActivity"/>
-        <activity android:name=".LoginActivity" >
+        <activity android:name=".MOTORISTA.MotoristaHome"  android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".RedefinirSenha"  android:screenOrientation="portrait"/>
+        <activity android:name=".USUARIO.UsuarioHome" android:screenOrientation="portrait"/>
+        <activity android:name=".MOTORISTA.CadastroMotoristas"  android:screenOrientation="portrait"/>
+        <activity android:name=".USUARIO.CadastrarUsuarioActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".LoginActivity"  android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

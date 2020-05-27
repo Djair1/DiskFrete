@@ -286,9 +286,9 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString("ATOR",ator);
         editor.commit();
         Intent it = new Intent(LoginActivity.this, MotoristaHome.class);
-      //  it.setFlags(it.FLAG_ACTIVITY_CLEAR_TASK| it.FLAG_ACTIVITY_NEW_TASK);
+        it.setFlags(it.FLAG_ACTIVITY_CLEAR_TASK| it.FLAG_ACTIVITY_NEW_TASK);
         startActivity(it);
-        finish();
+
     }
 
     private void  chamarMotoristajaCadastrado(){

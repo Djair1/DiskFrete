@@ -6,7 +6,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 tools:context=".USUARIO.UsuarioHome"
-                android:background="@color/common_google_signin_btn_text_dark_default">
+>
 
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
@@ -17,10 +17,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:menu_fab_label="Menu"
-            app:menu_colorNormal="#1A237E"
+            app:menu_colorNormal="@android:color/black"
             app:menu_colorPressed="@color/colorAccent"
             app:menu_colorRipple="#6200EA"
-            app:menu_labels_colorNormal="#E8EAF6"
+            app:menu_labels_colorNormal="#1A237E"
             app:menu_labels_colorPressed="#4CAF50"
             app:menu_labels_colorRipple="#FF9800"
             android:clickable="true" app:srcCompat="@android:drawable/ic_menu_manage"
@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:onClick="historicoDfretes"
                 app:fab_label="Historico"
-                app:fab_colorNormal="#26C6DA"
+                app:fab_colorNormal="#9CCC65"
                 app:fab_colorPressed="#4CAF50"
                 app:fab_colorRipple="#FFC107"
                 android:clickable="true"
