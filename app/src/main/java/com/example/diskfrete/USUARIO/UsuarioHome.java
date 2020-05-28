@@ -12,6 +12,7 @@ import android.os.Bundle;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.example.diskfrete.HistoricoDeFretes;
 import com.example.diskfrete.LoginActivity;
 import com.example.diskfrete.MOTORISTA.Motorista;
 import com.example.diskfrete.R;
@@ -42,6 +43,7 @@ public class UsuarioHome extends AppCompatActivity {
     int posicao;
     private FloatingActionMenu BotaoMenu;
     private String frete;
+    private FirebaseUser usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,7 @@ public class UsuarioHome extends AppCompatActivity {
 
 
         database= FirebaseDatabase.getInstance().getReference("Motoristas");
+        usuario = FirebaseAuth.getInstance().getCurrentUser();
         barraDeProgresso = new ProgressDialog(this);
 
         BotaoMenu =findViewById(R.id.floatingActionButton1);
@@ -104,7 +107,10 @@ public void logoutUsuario(View view){
 
 
 public void historicoDfretes(View view){
-
+    Intent it = new Intent(UsuarioHome.this, HistoricoDeFretes.class);
+    String user = usuario.getEmail();
+    it.putExtra("USUARIO",user);
+    startActivity(it);
 }
 
 
