@@ -24,6 +24,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.*;
 
+import static com.example.diskfrete.MOTORISTA.MotoristaHome.Preferences_frete_selecionado;
 import static com.example.diskfrete.USUARIO.CadastrarFrete.Usuario_Solicitacao_concluida;
 
 
@@ -59,6 +60,7 @@ public class LoginActivity extends AppCompatActivity {
 
         carregarSolicitacaoDoUsuario();
         chamarMotoristajaCadastrado();
+        carregarfreteaceitoPeloMotorista();
 
 
 
@@ -215,12 +217,20 @@ public class LoginActivity extends AppCompatActivity {
     private void carregarSolicitacaoDoUsuario() {
         SharedPreferences pref=getSharedPreferences( Usuario_Solicitacao_concluida,MODE_PRIVATE);
         emailM =pref.getString("EMAIL",null);
+        String freteAceito=pref.getString("UFA",null);
         if (emailM != null) {
 
             Intent it = new Intent(LoginActivity.this, TeladeEspera.class);
             //  it.setFlags(it.FLAG_ACTIVITY_CLEAR_TASK | it.FLAG_ACTIVITY_NEW_TASK);
             startActivity(it);
             finish();
+
+        }else if(freteAceito!=null){
+            Intent it = new Intent(LoginActivity.this, UsuarioFreteAceito.class);
+            //  it.setFlags(it.FLAG_ACTIVITY_CLEAR_TASK | it.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(it);
+            finish();
+
 
         }else{carregarUsuarioHome();}
 
@@ -304,6 +314,21 @@ public class LoginActivity extends AppCompatActivity {
         }
 
 }
+
+   public void carregarfreteaceitoPeloMotorista(){
+
+        SharedPreferences edit = getSharedPreferences(Preferences_frete_selecionado,MODE_PRIVATE);
+        String frete= edit.getString("FRETEACEITO",null);
+
+      if (frete!=null){
+          Intent it = new Intent(LoginActivity.this, FreteMotorista.class);
+          it.setFlags(it.FLAG_ACTIVITY_CLEAR_TASK| it.FLAG_ACTIVITY_NEW_TASK);
+          startActivity(it);
+          finish();
+      }
+
+   }
+
 }
 
 

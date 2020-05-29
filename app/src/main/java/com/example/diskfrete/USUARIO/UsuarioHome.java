@@ -80,6 +80,7 @@ public class UsuarioHome extends AppCompatActivity {
          adapter.setOnItemClickListener(new OnItemClickListener() {
              @Override
              public void onItemClick(@NonNull Item item, @NonNull View view) {
+                 BotaoMenu.close(true);
                  chamaMotorista(item);
 
 
@@ -110,6 +111,7 @@ public void historicoDfretes(View view){
     Intent it = new Intent(UsuarioHome.this, HistoricoDeFretes.class);
     String user = usuario.getEmail();
     it.putExtra("USUARIO",user);
+    BotaoMenu.close(true);
     startActivity(it);
 }
 

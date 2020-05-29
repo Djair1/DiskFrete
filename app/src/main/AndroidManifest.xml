@@ -9,7 +9,11 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".HistoricoDeFretes">
+        <activity android:name=".UsuarioFreteAceito">
+        </activity>
+        <activity
+                android:name=".HistoricoDeFretes"
+                android:screenOrientation="portrait">
         </activity>
         <activity
                 android:name=".MOTORISTA.FreteMotorista"
