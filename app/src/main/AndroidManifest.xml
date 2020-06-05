@@ -9,54 +9,56 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".UsuarioFreteAceito">
+        <activity android:name=".Controller.MOTORISTA.FreteDisponivel">
+        </activity>
+        <activity android:name=".Controller.USUARIO.UsuarioFreteAceito">
         </activity>
         <activity
-                android:name=".HistoricoDeFretes"
+                android:name=".Controller.HistoricoDeFretes"
                 android:screenOrientation="portrait">
         </activity>
         <activity
-                android:name=".MOTORISTA.FreteMotorista"
+                android:name=".Controller.MOTORISTA.FreteMotorista"
                 android:screenOrientation="portrait">
         </activity>
         <activity
-                android:name=".MOTORISTA.CadastrarMotorista2"
+                android:name=".Controller.MOTORISTA.CadastrarMotorista2"
                 android:screenOrientation="portrait">
         </activity>
         <activity
-                android:name=".MOTORISTA.CadastroMotoristas1"
+                android:name=".Controller.MOTORISTA.CadastroMotoristas1"
                 android:screenOrientation="portrait">
         </activity>
         <activity
-                android:name=".DialogoCadastro"
+                android:name=".Controller.DialogoCadastro"
                 android:screenOrientation="portrait">
         </activity>
         <activity
-                android:name=".USUARIO.TeladeEspera"
+                android:name=".Controller.USUARIO.TeladeEspera"
                 android:screenOrientation="portrait">
         </activity>
         <activity
-                android:name=".USUARIO.CadastrarFrete"
+                android:name=".Controller.USUARIO.CadastrarFrete"
                 android:screenOrientation="portrait">
         </activity>
         <activity
-                android:name=".MOTORISTA.MotoristaHome"
+                android:name=".Controller.MOTORISTA.MotoristaHome"
                 android:screenOrientation="portrait">
         </activity>
         <activity
-                android:name=".RedefinirSenha"
+                android:name=".Controller.RedefinirSenha"
                 android:screenOrientation="portrait"/>
         <activity
-                android:name=".USUARIO.UsuarioHome"
+                android:name=".Controller.USUARIO.UsuarioHome"
                 android:screenOrientation="portrait"/>
         <activity
-                android:name=".MOTORISTA.CadastroMotoristas"
+                android:name=".Controller.MOTORISTA.CadastroMotoristas"
                 android:screenOrientation="portrait"/>
         <activity
-                android:name=".USUARIO.CadastrarUsuarioActivity"
+                android:name=".Controller.USUARIO.CadastrarUsuario"
                 android:screenOrientation="portrait"/>
         <activity
-                android:name=".LoginActivity"
+                android:name=".Controller.Login"
                 android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

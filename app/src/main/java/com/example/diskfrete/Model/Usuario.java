@@ -1,4 +1,4 @@
-package com.example.diskfrete.USUARIO;
+package com.example.diskfrete.Model;
 
 
 

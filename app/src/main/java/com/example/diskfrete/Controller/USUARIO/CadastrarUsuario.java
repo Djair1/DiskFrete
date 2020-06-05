@@ -1,4 +1,4 @@
-package com.example.diskfrete.USUARIO;
+package com.example.diskfrete.Controller.USUARIO;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -11,7 +11,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import com.example.diskfrete.Model.Usuario;
 import com.example.diskfrete.R;
+import com.example.diskfrete.db.Firebase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -19,14 +21,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import static com.example.diskfrete.LoginActivity.Usuario_PREFERENCES;
+import static com.example.diskfrete.Model.DadosPreferences.dadosDoLoginUsuario;
 
-public class CadastrarUsuarioActivity extends AppCompatActivity {
+public class CadastrarUsuario extends AppCompatActivity {
 
-private FirebaseAuth mAuth;
 private String nomeCompleto ,telefone,email,senha,confiSenha;
-private DatabaseReference database;
 private ProgressDialog barraDeProgresso;
+private Firebase firebase;
 
 
     @Override
@@ -35,15 +36,10 @@ private ProgressDialog barraDeProgresso;
         setContentView(R.layout.activity_cadastrar_usuario);
         setTitle("Cadastro Usuario");
 
-        mAuth = FirebaseAuth.getInstance();
-        database= FirebaseDatabase.getInstance().getReference("Usuarios");
         barraDeProgresso = new ProgressDialog(this);
-
-
 
         final EditText ednomeCompleto = (EditText)findViewById(R.id.editText2);
         final EditText edTelefone=(EditText)findViewById(R.id.editText6);
-
         final EditText edmail = (EditText)findViewById(R.id.editText3) ;
          final EditText edSenha=(EditText)findViewById(R.id.editText);
          final EditText edConfSenha = (EditText)findViewById(R.id.editText5);
@@ -65,37 +61,37 @@ private ProgressDialog barraDeProgresso;
 
 
                 if(nomeCompleto.length()<=3){
-                    Toast.makeText(CadastrarUsuarioActivity.this, "por favor inserir nome completo.",
+                    Toast.makeText(CadastrarUsuario.this, "por favor inserir nome completo.",
                             Toast.LENGTH_SHORT).show();
                 }
                 else if(telefone.length()==0){
-                    Toast.makeText(CadastrarUsuarioActivity.this, "Campo telefone vazio",
+                    Toast.makeText(CadastrarUsuario.this, "Campo telefone vazio",
                             Toast.LENGTH_SHORT).show();
                 }
 
 
                 else if(email.length()== 0){
-                    Toast.makeText(CadastrarUsuarioActivity.this, "Campo Email vazio!",
+                    Toast.makeText(CadastrarUsuario.this, "Campo Email vazio!",
                             Toast.LENGTH_SHORT).show();
                 }
 
                 else if (senha.length()== 0){
-                    Toast.makeText(CadastrarUsuarioActivity.this, "entre com a senha. ",
+                    Toast.makeText(CadastrarUsuario.this, "entre com a senha. ",
                             Toast.LENGTH_SHORT).show();
                 }
                 else if (senha.length()< 6){
-                    Toast.makeText(CadastrarUsuarioActivity.this, "inserir senha com pelo menos 6 Digitos. ",
+                    Toast.makeText(CadastrarUsuario.this, "inserir senha com pelo menos 6 Digitos. ",
                             Toast.LENGTH_SHORT).show();
                 }
 
                else if (!senha.equals(confiSenha)){
-                    Toast.makeText(CadastrarUsuarioActivity.this, "as senhas não correspondem. ",
+                    Toast.makeText(CadastrarUsuario.this, "as senhas não correspondem. ",
                             Toast.LENGTH_SHORT).show();
                 }
                else if(Patterns.EMAIL_ADDRESS.matcher(email).matches()){
                     CadastrarUsuario();
 
-                }else{Toast.makeText(CadastrarUsuarioActivity.this, " email inválido ! ",
+                }else{Toast.makeText(CadastrarUsuario.this, " email inválido ! ",
                         Toast.LENGTH_SHORT).show();}
 
 
@@ -109,17 +105,18 @@ private ProgressDialog barraDeProgresso;
                 barraDeProgresso.setMessage("conectando...");
                 barraDeProgresso.setCanceledOnTouchOutside(false);
                 barraDeProgresso.show();
-                mAuth.createUserWithEmailAndPassword(email, senha)
-                        .addOnCompleteListener(CadastrarUsuarioActivity.this, new OnCompleteListener<AuthResult>() {
+                firebase = new Firebase();
+                firebase.getFirebaseAuth().createUserWithEmailAndPassword(email, senha)
+                        .addOnCompleteListener(CadastrarUsuario.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
 
                                 if (task.isSuccessful()) {
-                                    carregarUsuario();
+                                    CadastrarUsuarioNoBanco();
 
                                 } else {
                                     barraDeProgresso.dismiss();
-                                    Toast.makeText(CadastrarUsuarioActivity.this, "Erro no cadastro !.",
+                                    Toast.makeText(CadastrarUsuario.this, "Erro no cadastro !.",
                                             Toast.LENGTH_SHORT).show();
 
                                 }
@@ -132,21 +129,30 @@ private ProgressDialog barraDeProgresso;
 
 
             private void carregarUsuario() {
-                SharedPreferences.Editor editor = getSharedPreferences(Usuario_PREFERENCES,MODE_PRIVATE).edit();
-                editor.putString("email",email);
-                editor.commit();
-                Intent it = new Intent(CadastrarUsuarioActivity.this, UsuarioHome.class);
+
+                Intent it = new Intent(CadastrarUsuario.this, UsuarioHome.class);
                 it.setFlags(it.FLAG_ACTIVITY_CLEAR_TASK| it.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(it);
-                Toast.makeText(CadastrarUsuarioActivity.this, "Cadastro efetuado com susseso", Toast.LENGTH_SHORT).show();
-                CadastrarUsuarioNoBanco();
+                Toast.makeText(CadastrarUsuario.this, "Cadastro efetuado com susseso", Toast.LENGTH_SHORT).show();
+
             }
 
             private void CadastrarUsuarioNoBanco() {
-                String id = database.push().getKey();
-                Usuario usuario = new Usuario(id,nomeCompleto,telefone,email);
-                database.child(id).setValue(usuario);
+                String ator="usuario";
+                SharedPreferences.Editor editor = getSharedPreferences(dadosDoLoginUsuario,MODE_PRIVATE).edit();
+                editor.putString("EMAIL",email);
+                editor.putString("ATOR",ator);
+                editor.commit();
 
+                firebase= new Firebase();
+
+
+
+                String id = firebase.getDatabaseUsuario().push().getKey();
+                Usuario usuario = new Usuario(id,nomeCompleto,telefone,email);
+                firebase.persistirUsuario(usuario);
+
+                carregarUsuario();
 
             }
         });

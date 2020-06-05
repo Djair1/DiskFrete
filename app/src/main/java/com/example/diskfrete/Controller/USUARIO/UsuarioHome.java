@@ -1,4 +1,4 @@
-package com.example.diskfrete.USUARIO;
+package com.example.diskfrete.Controller.USUARIO;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -12,10 +12,11 @@ import android.os.Bundle;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.diskfrete.HistoricoDeFretes;
-import com.example.diskfrete.LoginActivity;
-import com.example.diskfrete.MOTORISTA.Motorista;
+import com.example.diskfrete.Controller.HistoricoDeFretes;
+import com.example.diskfrete.Controller.Login;
+import com.example.diskfrete.Model.Motorista;
 import com.example.diskfrete.R;
+import com.example.diskfrete.db.Firebase;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,13 +30,13 @@ import com.xwray.groupie.ViewHolder;
 
 import java.util.*;
 
-import static com.example.diskfrete.LoginActivity.Usuario_PREFERENCES;
-import static com.example.diskfrete.USUARIO.CadastrarFrete.Usuario_Solicitacao_concluida;
+import static com.example.diskfrete.Model.DadosPreferences.*;
+
 
 public class UsuarioHome extends AppCompatActivity {
 
 
-    private DatabaseReference database;
+    private Firebase fb;
     private ProgressDialog barraDeProgresso;
     private  GroupAdapter adapter;
     private RecyclerView lista;
@@ -43,39 +44,25 @@ public class UsuarioHome extends AppCompatActivity {
     int posicao;
     private FloatingActionMenu BotaoMenu;
     private String frete;
-    private FirebaseUser usuario;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usuario_home);
+        setTitle("DISK FRETE");
 
 
-
-
-        database= FirebaseDatabase.getInstance().getReference("Motoristas");
-        usuario = FirebaseAuth.getInstance().getCurrentUser();
         barraDeProgresso = new ProgressDialog(this);
 
         BotaoMenu =findViewById(R.id.floatingActionButton1);
         BotaoMenu.setClosedOnTouchOutside(true);
-        lista = findViewById(R.id.ListaMotorista);
+        lista = findViewById(R.id.listaDeMotoristas);
         adapter = new GroupAdapter();
         lista.setAdapter(adapter);
         lista.setLayoutManager(new LinearLayoutManager(this));
 
-
-
         carregarMotoristas();
-        freteCancelado();
-
-
-
-
-
-
-
-
 
          adapter.setOnItemClickListener(new OnItemClickListener() {
              @Override
@@ -86,21 +73,22 @@ public class UsuarioHome extends AppCompatActivity {
 
              }
          });
+ }
 
-}
-
-  //  @Override
+    //  @Override
   //  public void onBackPressed() {
    //     super.finish();
    // }
 
 public void logoutUsuario(View view){
-    SharedPreferences.Editor editor = getSharedPreferences(Usuario_PREFERENCES,MODE_PRIVATE).edit();
+    SharedPreferences.Editor editor = getSharedPreferences(dadosDoLoginUsuario,MODE_PRIVATE).edit();
     editor.putString("EMAIL",null);
     editor.putString("ATOR",null);
     editor.apply();
-    FirebaseAuth.getInstance().signOut();
-    Intent it = new Intent(UsuarioHome.this, LoginActivity.class);
+    fb = new Firebase();
+    FirebaseAuth f = fb.getFirebaseAuth();
+    f.getInstance().signOut();
+    Intent it = new Intent(UsuarioHome.this, Login.class);
     startActivity(it);
     finish();
 }
@@ -109,8 +97,10 @@ public void logoutUsuario(View view){
 
 public void historicoDfretes(View view){
     Intent it = new Intent(UsuarioHome.this, HistoricoDeFretes.class);
-    String user = usuario.getEmail();
-    it.putExtra("USUARIO",user);
+    fb = new Firebase();
+    FirebaseAuth f = fb.getFirebaseAuth();
+    String usuario = f.getCurrentUser().getEmail();
+    it.putExtra("USUARIO",usuario);
     BotaoMenu.close(true);
     startActivity(it);
 }
@@ -168,9 +158,12 @@ public void barradProgresso(boolean resposta,String title){
 
 
     private void carregarMotoristas() {
+        fb=new Firebase();
+   DatabaseReference df = fb.getDatabaseMotorista();
 
         barradProgresso(true,"BEM VINDO...");
-        database.addValueEventListener(new ValueEventListener() {
+
+        df.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -226,21 +219,5 @@ private itemMotorista (Motorista motorista ){
             return  R.layout.item_motorista;
         }
     }
-public void freteCancelado(){
 
-    SharedPreferences pref=getSharedPreferences( Usuario_Solicitacao_concluida,MODE_PRIVATE);
-    frete =pref.getString("STFRETE",null);
-
-    if(frete != null){
-
-        Snackbar.make(null, "Motorista indisponivel no momento" ,Snackbar.LENGTH_LONG).setAction("Action",null).show();
-
-        SharedPreferences.Editor editor = getSharedPreferences(Usuario_Solicitacao_concluida,MODE_PRIVATE).edit();
-        editor.putString("EMAIL",null);
-        editor.putString("STFRETE",null);
-        editor.commit();
-
-    }
-
-}
 }
