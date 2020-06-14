@@ -18,9 +18,7 @@ import com.example.diskfrete.Model.Motorista;
 import com.example.diskfrete.R;
 import com.example.diskfrete.db.Firebase;
 import com.github.clans.fab.FloatingActionMenu;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;
 import com.squareup.picasso.Picasso;
 import com.xwray.groupie.GroupAdapter;
@@ -30,7 +28,7 @@ import com.xwray.groupie.ViewHolder;
 
 import java.util.*;
 
-import static com.example.diskfrete.Model.DadosPreferences.*;
+import static com.example.diskfrete.Preferencias.DadosPreferences.*;
 
 
 public class UsuarioHome extends AppCompatActivity {
@@ -51,7 +49,6 @@ public class UsuarioHome extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usuario_home);
         setTitle("DISK FRETE");
-
 
         barraDeProgresso = new ProgressDialog(this);
 
@@ -82,9 +79,7 @@ public class UsuarioHome extends AppCompatActivity {
 
 public void logoutUsuario(View view){
     SharedPreferences.Editor editor = getSharedPreferences(dadosDoLoginUsuario,MODE_PRIVATE).edit();
-    editor.putString("EMAIL",null);
-    editor.putString("ATOR",null);
-    editor.apply();
+    editor.clear().commit();
     fb = new Firebase();
     FirebaseAuth f = fb.getFirebaseAuth();
     f.getInstance().signOut();
@@ -125,22 +120,7 @@ public void historicoDfretes(View view){
         //        Toast.LENGTH_SHORT).show();
     }
 
-    private void buscarCurrentUser() {
 
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            // String name = user.getDisplayName();
-            String email = user.getEmail();
-            //  Uri photoUrl = user.getPhotoUrl();
-            boolean emailVerified = user.isEmailVerified();
-            String uid = user.getUid();
-
-        } else {
-            Toast.makeText(UsuarioHome.this, "Erro ao buscar informações.",
-                    Toast.LENGTH_SHORT).show();
-        }
-    }
 
 public void barradProgresso(boolean resposta,String title){
         if(resposta==true){
@@ -203,12 +183,17 @@ private itemMotorista (Motorista motorista ){
            TextView texto1= viewHolder.itemView.findViewById(R.id.textView4);
            TextView texto2= viewHolder.itemView.findViewById(R.id.textView16);
            TextView texto3= viewHolder.itemView.findViewById(R.id.textView17);
+           TextView texto4= viewHolder.itemView.findViewById(R.id.textView32);
          ImageView fotoMotorista = viewHolder.itemView.findViewById(R.id.imageView2);
 
          texto2.setText(motorista.getTipoDeVeiculo());
          texto1.setText(motorista.getNomeCompleto());
          texto3.setText(motorista.getVolumeMaximo());
-            Picasso.get().load(motorista.getFotoPerfil()).resize(500,500).centerCrop().into( fotoMotorista);
+         texto4.setText(motorista.getClassificacao());
+         Picasso.get().load(motorista.getFotoPerfil()).resize(500,500).centerCrop().into( fotoMotorista);
+
+
+
 
 
 

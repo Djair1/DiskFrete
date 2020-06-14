@@ -2,7 +2,11 @@ package com.example.diskfrete.Controller.MOTORISTA;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
+import android.graphics.drawable.Drawable;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -16,8 +20,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.diskfrete.Model.Motorista;
-import com.example.diskfrete.Model.ValidarCpf;
 import com.example.diskfrete.R;
+import com.example.diskfrete.db.Firebase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -26,26 +30,29 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.core.utilities.ParsedUrl;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
+
+import java.io.IOException;
 
 public class CadastroMotoristas extends AppCompatActivity {
 
 
-    private FirebaseAuth mAuth;
-    private String nomeCompleto, cpf, telefone, email, placaDoVeiculo, tipoDeVeiculo, VolumeMaximo, senha, confiSenha, fotoPerfil, fotoCNH=" ", fotoCRLV=" ";
-    private DatabaseReference database;
+
+    private String nomeCompleto, cpf, telefone, email, placaDoVeiculo, tipoDeVeiculo, VolumeMaximo, senha, confiSenha, fotoPerfil=" ", fotoCNH=" ", fotoCRLV=" ",classificacao="1";
     private ProgressDialog barraDeProgresso;
     private ValidarCpf validarCpf;
-    EditText ednomeCompleto,edCpf, edTelefone,edmail,edPlaca,edSenha,edveiculo,edpesoVolumeMaximo,edConfSenha;
-    Button capturarDaGaleria,btcadastrar;
-    ImageView imagem;
-    Uri perfilImagem;
-    StorageReference refPerfil;
-    Bitmap bit;
-    String filename;
+    private EditText ednomeCompleto,edCpf, edTelefone,edmail,edPlaca,edSenha,edveiculo,edpesoVolumeMaximo,edConfSenha;
+    private Button capturarDaGaleria,btcadastrar;
+    private ImageView imagem;
+    private Uri perfilImagem;
+    private Firebase firebase;
+    private Motorista novomotorista;
+    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +60,7 @@ public class CadastroMotoristas extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro_motoristas);
         setTitle("Cadastro Motorista");
 
-        mAuth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance().getReference("Motoristas");
-        filename = database.push().getKey();
-        refPerfil = FirebaseStorage.getInstance().getReference("/MotoristasPerfil/" + filename);
+
         barraDeProgresso = new ProgressDialog(this);
 
 
@@ -201,6 +205,7 @@ public class CadastroMotoristas extends AppCompatActivity {
                    //  bit = MediaStore.Images.Media.getBitmap(getContentResolver(), imagemSelecionada);
                     // imagem.setImageDrawable(new BitmapDrawable(bit));
 
+
                      Picasso.get()
                              .load(perfilImagem)
                              .resize(500,500)
@@ -218,73 +223,95 @@ public class CadastroMotoristas extends AppCompatActivity {
         barraDeProgresso.setTitle("CONECTANDO");
         barraDeProgresso.setMessage("aguarde...");
         barraDeProgresso.setCanceledOnTouchOutside(false);
+        barraDeProgresso.setCancelable(false);
         barraDeProgresso.show();
-        mAuth.createUserWithEmailAndPassword(email, senha)
-                .addOnCompleteListener(CadastroMotoristas.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
 
-                        if (task.isSuccessful()) {
-                            subirPerfilMotoristaFirestore();
+        CadastrarMotoristaNoBanco();
 
-                        } else {
-                            barraDeProgresso.dismiss();
-                            Toast.makeText(CadastroMotoristas.this, "Erro ao iniciar cadastro!",
-                                    Toast.LENGTH_SHORT).show();
+     //   firebase = new Firebase();
 
-                        }
+    //    firebase.getFirebaseAuth().createUserWithEmailAndPassword(email, senha)
+      //          .addOnCompleteListener(CadastroMotoristas.this, new OnCompleteListener<AuthResult>() {
+        //            @Override
+       //            public void onComplete(@NonNull Task<AuthResult> task) {
+
+        //                if (task.isSuccessful()) {
+
+          //                  CadastrarMotoristaNoBanco();
+
+            //            } else {
+              //              barraDeProgresso.dismiss();
+               //             Toast.makeText(CadastroMotoristas.this, "Erro ao iniciar cadastro!",
+                //                    Toast.LENGTH_SHORT).show();
+
+                    //    }
 
 
-                    }
-                });
+            //        }
+             //   });
 
 
     }
+
+
+    private void CadastrarMotoristaNoBanco() {
+        firebase = new Firebase();
+        id = firebase.getDatabaseMotoristaNovo().push().getKey();
+        Motorista motorista = new Motorista(id,nomeCompleto,cpf,telefone,email,placaDoVeiculo,tipoDeVeiculo,VolumeMaximo,fotoPerfil,fotoCNH,fotoCRLV,classificacao,senha);
+        firebase.persistirNovoMotorista(motorista);
+        this.novomotorista=motorista;
+        subirPerfilMotoristaFirestore();
+    }
+
 
 
 
 
     private void subirPerfilMotoristaFirestore() {
 
-        // String filename = UUID.randomUUID().toString();
-        refPerfil.putFile(perfilImagem).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                refPerfil.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
+        String filename=id;
+        final StorageReference referenciaPerfil = FirebaseStorage.getInstance().getReference("/MotoristasPerfil/" +filename);
+        referenciaPerfil.putFile(perfilImagem).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+        @Override
+        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+            referenciaPerfil.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
 
-                        fotoPerfil = uri.toString();
-                        CadastrarMotoristaNoBanco();
-                    }
+                    fotoPerfil = uri.toString();
+                    atualizarDadosMotorista();
+                }
 
-                });
+            });
 
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(CadastroMotoristas.this, " Erro ao processar Imagem do perfil",
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
+        }
+    }).addOnFailureListener(new OnFailureListener() {
+        @Override
+        public void onFailure(@NonNull Exception e) {
+            barraDeProgresso.dismiss();
+            referenciaPerfil.delete();
+            Toast.makeText(CadastroMotoristas.this, " Erro ao processar Imagem",
+                    Toast.LENGTH_SHORT).show();
+        }
+    });
 
     }
 
-    private void CadastrarMotoristaNoBanco() {
-        String id = database.push().getKey();
-        Motorista motorista = new Motorista(id,nomeCompleto,cpf,telefone,email,placaDoVeiculo,tipoDeVeiculo,VolumeMaximo,fotoPerfil,fotoCNH,fotoCRLV);
-        database.child(id).setValue(motorista);
+    private void atualizarDadosMotorista() {
 
+        novomotorista.setFotoPerfil(fotoPerfil);
+        firebase = new Firebase();
+        firebase.persistirNovoMotorista(novomotorista);
+        motoristaNext();
 
-        motoristaNext(id);
     }
 
-    private void motoristaNext(String uid) {
+
+    private void motoristaNext() {
 
         Intent it = new Intent(CadastroMotoristas.this, CadastroMotoristas1.class);
         it.setFlags(it.FLAG_ACTIVITY_CLEAR_TASK | it.FLAG_ACTIVITY_NEW_TASK);
-        it.putExtra("ID",uid);
+        it.putExtra("ID",id);
         startActivity(it);
         finish();
 

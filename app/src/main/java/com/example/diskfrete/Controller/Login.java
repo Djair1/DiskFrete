@@ -14,6 +14,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
+import com.example.diskfrete.Controller.ADMINISTRADOR.AdministradorHome;
+import com.example.diskfrete.Controller.USUARIO.AvaliarMotorista;
+import com.example.diskfrete.Model.Administrador;
 import com.example.diskfrete.db.Firebase;
 import com.example.diskfrete.Controller.MOTORISTA.*;
 import com.example.diskfrete.Controller.USUARIO.TeladeEspera;
@@ -28,18 +31,17 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.database.*;
 
 
-import static com.example.diskfrete.Model.DadosPreferences.*;
+import static com.example.diskfrete.Preferencias.DadosPreferences.*;
 
 
 public class Login extends AppCompatActivity {
 
     EditText Email, Senha;
-    private String email,senha;
+    private String email, senha;
     private String ator;
     private ProgressDialog barraDeProgresso;
-    private Button cadastrar,entrar,ResetarSenha;
+    private Button cadastrar, entrar, ResetarSenha;
     private Firebase fb;
-
 
 
     @Override
@@ -47,8 +49,6 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         setTitle("DISK FRETE");
-
-
 
 
         cadastrar = (Button) findViewById(R.id.button4);
@@ -91,12 +91,7 @@ public class Login extends AppCompatActivity {
         });
 
 
-
-
-
-
-
- }
+    }
 
     @Override
     protected void onStart() {
@@ -105,26 +100,25 @@ public class Login extends AppCompatActivity {
         loginMotoristaSalvo();
     }
 
-    private void  validarcampos(){
+    private void validarcampos() {
 
-     email = Email.getText().toString().trim();
-     senha = Senha.getText().toString().trim();
-
-
-     if (email.length() == 0) {
-         Toast.makeText(Login.this, "Email Invalido ou vazio!",
-                 Toast.LENGTH_SHORT).show();
-     } else if (senha.length() == 0) {
-         Toast.makeText(Login.this, " inserir senha. ",
-                 Toast.LENGTH_SHORT).show();
-     } else {usuarioLogar();
+        email = Email.getText().toString().trim();
+        senha = Senha.getText().toString().trim();
 
 
-     }
+        if (email.length() == 0) {
+            Toast.makeText(Login.this, "Email Invalido ou vazio!",
+                    Toast.LENGTH_SHORT).show();
+        } else if (senha.length() == 0) {
+            Toast.makeText(Login.this, " inserir senha. ",
+                    Toast.LENGTH_SHORT).show();
+        } else {
+
+            usuarioLogar();
+        }
 
 
-
- }
+    }
 
     private void usuarioLogar() {
 
@@ -133,19 +127,20 @@ public class Login extends AppCompatActivity {
         barraDeProgresso.setCanceledOnTouchOutside(false);
         barraDeProgresso.show();
 
-      fb = new Firebase();
+        fb = new Firebase();
 
-      fb.getFirebaseAuth().signInWithEmailAndPassword(email, senha)
+        fb.getFirebaseAuth().signInWithEmailAndPassword(email, senha)
                 .addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if (task.isSuccessful()) {
 
-                             definirUsuario();
+                            definirUsuario();
 
                         } else {
 
+                            limparCampos();
                             barraDeProgresso.dismiss();
                             Toast.makeText(Login.this, "Erro ao realizar Login.",
                                     Toast.LENGTH_SHORT).show();
@@ -157,53 +152,54 @@ public class Login extends AppCompatActivity {
 
     }
 
-  private void  definirUsuario(){
-      carregarUsuarios();
-      carregarMotoristas();
+    private void definirUsuario() {
+        carregarUsuarios();
+        carregarMotoristas();
+        buscarAdministrador();
 
 
-  }
+    }
 
-  private void carregarUsuarios() {
-        fb= new Firebase();
+    private void carregarUsuarios() {
+        fb = new Firebase();
 
         fb.getDatabaseUsuario().addValueEventListener(new ValueEventListener() {
 
-          @Override
-          public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-              for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
+                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
 
-                  Usuario usuario = objSnapshot.getValue(Usuario.class);
+                    Usuario usuario = objSnapshot.getValue(Usuario.class);
 
-                  String email = usuario.getEmail();
-                  verificarTipoDeUsuario(email);
+                    String email = usuario.getEmail();
+                    verificarTipoDeUsuario(email);
 
-              }
+                }
 
-          }
+            }
 
 
-          @Override
-          public void onCancelled(@NonNull DatabaseError databaseError) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-          }
-      });
+            }
+        });
 
     }
 
     private void verificarTipoDeUsuario(String email) {
-        if(email.equals(this.email)){
+        if (email.equals(this.email)) {
             carregarUsuario();
         }
     }
 
     private void carregarUsuario() {
-        //    startActivity(new Intent(getBaseContext(),Trasicao.class));
-        this.ator="usuario";
-        SharedPreferences.Editor editor = getSharedPreferences(dadosDoLoginUsuario,MODE_PRIVATE).edit();
-        editor.putString("EMAIL",email);
-        editor.putString("ATOR",ator);
+
+        this.ator = "usuario";
+        SharedPreferences.Editor editor = getSharedPreferences(dadosDoLoginUsuario, MODE_PRIVATE).edit();
+        editor.putString("EMAIL", email);
+        editor.putString("ATOR", ator);
         editor.commit();
         Intent it = new Intent(Login.this, UsuarioHome.class);
         it.setFlags(it.FLAG_ACTIVITY_CLEAR_TASK | it.FLAG_ACTIVITY_NEW_TASK);
@@ -211,48 +207,49 @@ public class Login extends AppCompatActivity {
 
     }
 
-    private void  loginUsuarioSalvo() {
+    private void loginUsuarioSalvo() {
 
-        SharedPreferences pref=getSharedPreferences(AppInicializar,MODE_PRIVATE);
-        boolean telaEspera =pref.getBoolean("ESPERA",false);
-         boolean telaFreteAceito =pref.getBoolean("ACEITO",false);
+        SharedPreferences pref = getSharedPreferences(AppInicializar, MODE_PRIVATE);
+        boolean telaEspera = pref.getBoolean("ESPERA", false);
+        boolean telaFreteAceito = pref.getBoolean("ACEITO", false);
 
 
         if (telaEspera) {
 
             Intent it = new Intent(Login.this, TeladeEspera.class);
-          //  it.setFlags(it.FLAG_ACTIVITY_CLEAR_TASK | it.FLAG_ACTIVITY_NEW_TASK);
+            //  it.setFlags(it.FLAG_ACTIVITY_CLEAR_TASK | it.FLAG_ACTIVITY_NEW_TASK);
             startActivity(it);
             finish();
 
-        }else if(telaFreteAceito){
-           Intent it = new Intent(Login.this, UsuarioFreteAceito.class);
-          // it.setFlags(it.FLAG_ACTIVITY_CLEAR_TASK | it.FLAG_ACTIVITY_NEW_TASK);
+        } else if (telaFreteAceito) {
+            Intent it = new Intent(Login.this, UsuarioFreteAceito.class);
+            // it.setFlags(it.FLAG_ACTIVITY_CLEAR_TASK | it.FLAG_ACTIVITY_NEW_TASK);
             startActivity(it);
             finish();
+        } else {
+            carregarUsuarioHome();
         }
-            else{carregarUsuarioHome();}
 
     }
 
-    private void carregarUsuarioHome(){
-        SharedPreferences prefs=getSharedPreferences(dadosDoLoginUsuario,MODE_PRIVATE);
-        email=prefs.getString("EMAIL",null);
-        ator=prefs.getString("ATOR",null);
-       if(email!=null&&ator!=null){
+    private void carregarUsuarioHome() {
+        SharedPreferences prefs = getSharedPreferences(dadosDoLoginUsuario, MODE_PRIVATE);
+        email = prefs.getString("EMAIL", null);
+        ator = prefs.getString("ATOR", null);
+        if (email != null && ator != null) {
 
-           Intent it = new Intent(Login.this, UsuarioHome.class);
-          // it.setFlags(it.FLAG_ACTIVITY_CLEAR_TASK | it.FLAG_ACTIVITY_NEW_TASK);
-           startActivity(it);
-           finish();
+            Intent it = new Intent(Login.this, UsuarioHome.class);
+            // it.setFlags(it.FLAG_ACTIVITY_CLEAR_TASK | it.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(it);
+            finish();
         }
 
-     }
+    }
 
 
     private void carregarMotoristas() {
-     fb = new Firebase();
-     fb.getDatabaseMotorista().addValueEventListener(new ValueEventListener() {
+        fb = new Firebase();
+        fb.getDatabaseMotorista().addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -278,53 +275,99 @@ public class Login extends AppCompatActivity {
     }
 
     private void verificarMotorista(String email) {
-        if(email.equals(this.email)){
+        if (email.equals(this.email)) {
             carregarMotorista();
         }
     }
 
 
+    private void carregarMotorista() {
 
-
-    private void  carregarMotorista() {
-
-        this.ator="motorista";
-        SharedPreferences.Editor editor = getSharedPreferences(dadosDologinMotorista,MODE_PRIVATE).edit();
-        editor.putString("EMAIL",email);
-        editor.putString("ATOR",ator);
+        this.ator = "motorista";
+        SharedPreferences.Editor editor = getSharedPreferences(dadosDologinMotorista, MODE_PRIVATE).edit();
+        editor.putString("EMAIL", email);
+        editor.putString("ATOR", ator);
         editor.commit();
         Intent it = new Intent(Login.this, MotoristaHome.class);
-        it.setFlags(it.FLAG_ACTIVITY_CLEAR_TASK| it.FLAG_ACTIVITY_NEW_TASK);
+        it.setFlags(it.FLAG_ACTIVITY_CLEAR_TASK | it.FLAG_ACTIVITY_NEW_TASK);
         startActivity(it);
 
     }
 
-    public  void loginMotoristaSalvo(){
+    public void loginMotoristaSalvo() {
 
-        SharedPreferences prefs=getSharedPreferences(dadosDologinMotorista,MODE_PRIVATE);
-        email=prefs.getString("EMAIL",null);
-        ator=prefs.getString("ATOR",null);
+        SharedPreferences prefs = getSharedPreferences(dadosDologinMotorista, MODE_PRIVATE);
+        email = prefs.getString("EMAIL", null);
+        ator = prefs.getString("ATOR", null);
 
-        SharedPreferences pref = getSharedPreferences(AppInicializar,MODE_PRIVATE);
-        String id = pref.getString("ID",null);
+        SharedPreferences pref = getSharedPreferences(AppInicializar, MODE_PRIVATE);
+        String id = pref.getString("ID", null);
 
-        if(id!=null){
+        if (id != null) {
 
             Intent it = new Intent(Login.this, FreteMotorista.class);
-           // it.setFlags(it.FLAG_ACTIVITY_CLEAR_TASK| it.FLAG_ACTIVITY_NEW_TASK);
+            // it.setFlags(it.FLAG_ACTIVITY_CLEAR_TASK| it.FLAG_ACTIVITY_NEW_TASK);
             startActivity(it);
             finish();
 
-        }
-        else if(email!=null&&ator!=null){
+        } else if (email != null && ator != null) {
 
             Intent it = new Intent(Login.this, MotoristaHome.class);
-        // it.setFlags(it.FLAG_ACTIVITY_CLEAR_TASK| it.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(it);
-        finish();
-    }
+            // it.setFlags(it.FLAG_ACTIVITY_CLEAR_TASK| it.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(it);
+            finish();
+        }
     }
 
+
+    private void buscarAdministrador() {
+
+        fb = new Firebase();
+
+        fb.getDatabaseAdministrador().addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot objsnapshot:dataSnapshot.getChildren()){
+
+
+                    Administrador administrador=objsnapshot.getValue(Administrador.class);
+
+                   String em = administrador.getEmail();
+                   String se = administrador.getSenha();
+
+                   if(em.equals(email)&&se.equals(senha)){
+
+                       carregarTelaAdministrador();
+
+
+                   }
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    private void carregarTelaAdministrador() {
+
+       Intent intent = new Intent(Login.this, AdministradorHome.class);
+       startActivity(intent);
+       finish();
+    }
+
+    public void limparCampos(){
+
+        Senha.setText(" ");
+
+    }
 }
 
 
